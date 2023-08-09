@@ -39,6 +39,7 @@ In your Unity project go to `Assets` -> `Import Package` -> `Custom Package...` 
     ```
     Open Terminal at your project folder. If you have an M1 chip type "sudo arch -x86_64 gem install ffi" then "arch -x86_64 pod install" Other wise for Intel "pod install".
   - Disable bitcode on `Your iOS Unity project` and `Pods` -> `Build Settings` -> `Enable Bitcode` -> `No`.
+
 More info on [Firebase documentation](https://firebase.google.com/docs/cloud-messaging/unity/client).
 
 ### Step 3: Set up Mobile Notification package
