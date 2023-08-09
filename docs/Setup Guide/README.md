@@ -14,7 +14,7 @@
 ## Getting started with Reteno SDK / Setup guide
 
 ### Step 1: Add the Reteno SDK to your project
-In your Unity project go to `Assets` -> `Import Package` -> `Custom Package...` and select the [`RetenoSdk.unitypackage` file](../RetenoSDK.unitypackage)).
+In your Unity project go to `Assets` -> `Import Package` -> `Custom Package...` and select the [`RetenoSdk.unitypackage` file](../RetenoSDK.unitypackage).
 
 ### Step 2: Set up a Firebase Cloud Messaging client app with Unity
 - Create a Firebase project in the [Firebase console](https://console.firebase.google.com/).
