@@ -14,7 +14,7 @@
 ## Getting started with Reteno SDK / Setup guide
 
 ### Step 1: Add the Reteno SDK to your project
-In your Unity project go to `Assets` -> `Import Package` -> `Custom Package...` and select the `RetenoSdk.unitypackage` file.
+In your Unity project go to `Assets` -> `Import Package` -> `Custom Package...` and select the [`RetenoSdk.unitypackage` file](../RetenoSDK.unitypackage)).
 
 ### Step 2: Set up a Firebase Cloud Messaging client app with Unity
 - Create a Firebase project in the [Firebase console](https://console.firebase.google.com/).
@@ -26,18 +26,19 @@ In your Unity project go to `Assets` -> `Import Package` -> `Custom Package...` 
 - Install firebase messaging package.
     - `FirebaseMessaging.unitypackage`.
     - `FirebaseAuth.unitypackage`.
-- On iOS Podfile should contain `pod 'Firebase/Core'`, `pod 'Firebase/Messaging'` and `pod 'Firebase/Auth'`. Version are not required.
-```
-***
-target ‘UnityFramework’ do
-   pod ‘Firebase/Core’, ‘10.11.0’
-   pod ‘Firebase/Messaging’, ‘10.11.0’
-   pod ‘Firebase/Auth’, ‘10.11.0’
-end
-***
-```
-Open Terminal at your project folder. If you have an M1 chip type "sudo arch -x86_64 gem install ffi" then "arch -x86_64 pod install" Other wise for Intel "pod install".
-
+- On iOS 
+  - Podfile should contain `pod 'Firebase/Core'`, `pod 'Firebase/Messaging'` and `pod 'Firebase/Auth'`. Version are not required.
+    ```
+    ***
+    target ‘UnityFramework’ do
+       pod ‘Firebase/Core’
+       pod ‘Firebase/Messaging’
+       pod ‘Firebase/Auth’
+    end
+    ***
+    ```
+    Open Terminal at your project folder. If you have an M1 chip type "sudo arch -x86_64 gem install ffi" then "arch -x86_64 pod install" Other wise for Intel "pod install".
+  - Disable bitcode on `Your iOS Unity project` and `Pods` -> `Build Settings` -> `Enable Bitcode` -> `No`.
 More info on [Firebase documentation](https://firebase.google.com/docs/cloud-messaging/unity/client).
 
 ### Step 3: Set up Mobile Notification package
