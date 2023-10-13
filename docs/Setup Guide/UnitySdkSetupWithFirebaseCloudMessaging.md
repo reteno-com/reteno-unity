@@ -43,72 +43,10 @@ In your Unity project go to `Assets` -> `Import Package` -> `Custom Package...` 
 More info on [Firebase documentation](https://firebase.google.com/docs/cloud-messaging/unity/client).
 
 ### Step 3: Set up Mobile Notification package
-- Go to `Window` -> `Package Manager` -> `Reteno` -> `Mobile Notification` -> `Install`. More info on [Package Manager documentation](https://docs.unity3d.com/Packages/com.unity.package-manager-ui@latest/index.html)
+- Go to `Window` -> `Package Manager` -> `Mobile Notification` -> `Install`. More info on [Package Manager documentation](https://docs.unity3d.com/Packages/com.unity.package-manager-ui@latest/index.html)
 - Add reference to you *.asmdef file. More info on [Assembly Definition Files documentation](https://docs.unity3d.com/Manual/ScriptCompilationAssemblyDefinitionFiles.html)
   - For iOS — `Unity.Notifications.iOS`
   - For Android — `Unity.Notifications.Android`
 
-### Step 4: Initialize Firebase Cloud Messaging
-To initialize Firebase Cloud Messaging, call the `InitializeFirebase` method in the `Start` method of your `MonoBehaviour` class.
-```csharp
-using RetenoSdk;
-using Firebase;
-using Firebase.Extensions;
-using Firebase.Messaging;
-
-public class YourClass : MonoBehaviour
-{
-    void Start()
-    {
-        InitializeFirebase();
-    }
-
-    /// <summary>
-    /// Initializes the firebase
-    /// </summary>
-    private static void InitializeFirebase()
-    {
-        FirebaseApp.CheckAndFixDependenciesAsync().ContinueWithOnMainThread(task =>
-        {
-            dependencyStatus = task.Result;
-            if (dependencyStatus == DependencyStatus.Available)
-            {
-                FirebaseMessaging.MessageReceived += OnMessageReceived;
-                FirebaseMessaging.TokenReceived += OnTokenReceived;
-                FirebaseMessaging.SubscribeAsync(Topic).ContinueWithOnMainThread(null);
-
-                FirebaseMessaging.RequestPermissionAsync().ContinueWithOnMainThread(null);
-                Debug.Log("Firebase Messaging Initialized");
-            }
-            else
-            {
-                Debug.LogError("Could not resolve all Firebase dependencies: " + dependencyStatus);
-            }
-        });
-    }
-
-    /// <summary>
-    /// Ons the message received using the specified sender
-    /// </summary>
-    /// <param name="sender">The sender</param>
-    /// <param name="e">The </param>
-    private static void OnMessageReceived(object sender, MessageReceivedEventArgs e)
-    {
-        RetenoSdk.ProcessMessage(e.Message.Data);
-    }
-    
-    /// <summary>
-    /// Ons the token received using the specified sender
-    /// </summary>
-    /// <param name="sender">The sender</param>
-    /// <param name="token">The token</param>
-    private static void OnTokenReceived(object sender, TokenReceivedEventArgs token)
-    {
-        RetenoSdk.SetToken(token.Token);
-    }
-}
-```
-
 ##### Licence
-
 Reteno Unity SDK is released under the MIT license.

@@ -22,7 +22,7 @@ Initialize the SDK by setting the access key and external user ID. The SDK deter
 
 Usage:
 ```csharp
-RetenoSdk.Initialize("your_access_key", "external_user_id");
+RetenoSdk.Initialize("your_access_key");
 ```
 
 ### Setting User Attributes
