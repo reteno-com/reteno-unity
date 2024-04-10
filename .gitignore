@@ -9,6 +9,11 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Uu]ser[Ss]ettings/
+/Assets/Firebase/
+/ios_export/
+/ios_export_BurstDebugInformation_DoNotShip/
+/RetenoTestApk_BurstDebugInformation_DoNotShip/
+
 
 # Android studio parameters folder
 .idea/
