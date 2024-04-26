@@ -6,6 +6,7 @@ dependencies {
     implementation 'androidx.work:work-runtime-ktx:2.8.1'
     implementation 'androidx.cardview:cardview:1.0.0'
     implementation "net.zetetic:android-database-sqlcipher:4.5.2"
+    implementation "com.reteno:fcm:2.0.3"
     api "com.google.code.gson:gson:2.10.1"
 
 // Android Resolver Dependencies Start
@@ -42,8 +43,8 @@ android {
     buildToolsVersion '**BUILDTOOLS**'
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     defaultConfig {

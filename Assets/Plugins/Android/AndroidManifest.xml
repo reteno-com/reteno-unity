@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools" package="com.reteno.testunity" android:versionCode="1" android:versionName="1.0">
-  <application android:name="com.reteno.testunity.RetenoApp"
+  <application android:name="com.reteno.unity.RetenoApp"
         android:label="@string/app_name" android:icon="@drawable/app_icon">
     <!-- The MessagingUnityPlayerActivity is a class that extends
          UnityPlayerActivity to work around a known issue when receiving
@@ -13,12 +13,30 @@
       <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
     </activity>
     <service
-        android:name="com.reteno.testunity.RetenoFirebaseListenerService"
+        android:name="com.reteno.unity.RetenoFirebaseListenerService"
         android:exported="true">
         <intent-filter>
             <action android:name="com.google.firebase.MESSAGING_EVENT"/>
         </intent-filter>
     </service>
     <service android:name="com.google.firebase.messaging.MessageForwardingService" android:permission="android.permission.BIND_JOB_SERVICE" android:exported="false"></service>
-  </application>
+
+    <receiver
+        android:name="com.reteno.unity.RetenoNotificationClickedReceiver"
+        android:enabled="true"
+        android:exported="true"/>
+    <meta-data
+        android:name="com.reteno.Receiver.NotificationClicked"
+        android:value="com.reteno.unity.RetenoNotificationClickedReceiver" />
+
+    <receiver
+        android:name="com.reteno.unity.RetenoInAppMessageCustomDataReceiver"
+        android:enabled="true"
+        android:exported="false" >
+      <intent-filter>
+        <action android:name="com.reteno.custom-inapp-data" />
+      </intent-filter>
+    </receiver>
+        
+    </application>
 </manifest>

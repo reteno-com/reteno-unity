@@ -17,7 +17,6 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
 // Android Resolver Repos Start
-        def unityProjectPath = $/file:///**DIR_UNITYPROJECT**/$.replace("\\", "/")
         maven {
             url "https://repo.maven.apache.org/maven2" // Assets/Push Notifications/Editor/Android/PushSDKDependencies.xml:8
         }
@@ -25,7 +24,7 @@ dependencyResolutionManagement {
             url "https://maven.google.com" // Assets/Push Notifications/Editor/Android/PushSDKDependencies.xml:8
         }
         maven {
-            url (unityProjectPath + "/Assets/GeneratedLocalRepo/Firebase/m2repository") // Assets/Firebase/Editor/AnalyticsDependencies.xml:18, Assets/Firebase/Editor/AppDependencies.xml:22, Assets/Firebase/Editor/AuthDependencies.xml:20, Assets/Firebase/Editor/MessagingDependencies.xml:24
+            url "file:////Users/ilia.solodiankin/UnityProjects/RetenoTest/Assets/GeneratedLocalRepo/Firebase/m2repository" // Assets/Firebase/Editor/AnalyticsDependencies.xml:18, Assets/Firebase/Editor/AppDependencies.xml:22, Assets/Firebase/Editor/AuthDependencies.xml:20, Assets/Firebase/Editor/MessagingDependencies.xml:24
         }
         mavenLocal()
 // Android Resolver Repos End

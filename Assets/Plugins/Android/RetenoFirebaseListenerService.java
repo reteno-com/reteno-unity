@@ -1,4 +1,4 @@
-package com.reteno.testunity;
+package com.reteno.unity;
 
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.firebase.messaging.cpp.ListenerService;
@@ -16,7 +16,7 @@ public class RetenoFirebaseListenerService extends ListenerService {
 
     @Override
     public void onMessageReceived(RemoteMessage message) {
-	boolean hasInteractionId = message.containsKey("es_interaction_id");
+	boolean hasInteractionId = message.getData().containsKey("es_interaction_id");
         if (hasInteractionId) {
             retenoMessagingService.onMessageReceived(message);
         } else {

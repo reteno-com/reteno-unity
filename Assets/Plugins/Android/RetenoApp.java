@@ -1,4 +1,4 @@
-package com.reteno.testunity;
+package com.reteno.unity;
 
 import android.app.Application;
 import android.content.Context;
@@ -9,14 +9,16 @@ import com.reteno.core.Reteno;
 import com.reteno.core.RetenoApplication;
 import com.reteno.core.RetenoImpl;
 
-public class RetenoApp extends Application implements RetenoApplication {
+public class RetenoApp extends Application implements RetenoApplication, RetenoUnityApplication {
 
     private Reteno retenoInstance;
+    private RetenoCustomDataHandler retenoCustomDataHandler;
 
     @Override
     public void onCreate() {
         super.onCreate();
         retenoInstance = new RetenoImpl(this, "f46c32c6-7d5e-4439-bba5-ce36ead04fc9");
+        retenoCustomDataHandler = new RetenoCustomDataHandler();
     }
 
     @NonNull
@@ -25,12 +27,8 @@ public class RetenoApp extends Application implements RetenoApplication {
         return retenoInstance;
     }
 
-    public static void getReteno(Context unityAppContext){
-        try {
-            ((RetenoApplication) unityAppContext).getRetenoInstance();
-        } catch (NullPointerException e){
-            Log.d("UnityPlugin", "Error providing Reteno instance.");
-            e.printStackTrace();
-        }
+    @Override
+    public RetenoCustomDataHandler getCustomDataHandler() {
+        return retenoCustomDataHandler;
     }
 }

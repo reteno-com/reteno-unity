@@ -136,7 +136,10 @@ PlayerSettings:
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
   bundleVersion: 1.0
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: 2235434364529675835, guid: 755b8ce7090b64ea69fba9c90763ec39, type: 2}
+  - {fileID: 11400000, guid: 5a95e3de6506f4b5583372e7b7233fbf, type: 2}
+  - {fileID: 11400000, guid: 2ee8b2b11914f4fc89f39f315f6e0175, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -167,7 +170,7 @@ PlayerSettings:
   overrideDefaultApplicationIdentifier: 1
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 26
-  AndroidTargetSdkVersion: 33
+  AndroidTargetSdkVersion: 34
   AndroidPreferredInstallLocation: 1
   aotOptions: 
   stripEngineCode: 1
@@ -259,8 +262,8 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: '{dedicated}: Documents/unity_yespo.keystore'
-  AndroidKeyaliasName: yala
+  AndroidKeystoreName: /Users/ilia.solodiankin/Yalantis/unity_android_builds/debug.keystore
+  AndroidKeyaliasName: reteno
   AndroidEnableArmv9SecurityFeatures: 0
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class RetenoAndroid
 {
@@ -61,14 +62,50 @@ public class RetenoAndroid
     }
 
     /// <summary>
-    /// Sends the custom event using the specified custom events
+    /// Change logic of In-App messages in paused state
+    /// Default state is InAppPauseBehaviour.POSTPONE_IN_APPS
     /// </summary>
-    /// <param name="customEvents">The custom events</param>
-    public static void LogEcommerceEvent(EcomEvent ecomEvent)
+    /// <param name="isPaused">New pause value</param>
+    public static void PauseInAppMessages(bool isPaused)
     {
-        // TODO
         AndroidJavaObject reteno = GetRetenoInstance();
-        //reteno.Call("logEcommerceEvent", userJava);
+        reteno.Call("pauseInAppMessages", isPaused);
+    }
+
+    /// <summary>
+    /// Pause or unpause In-App messages showing during app runtime.
+    /// </summary>
+    /// <param name="behaviour">new behaviour</param>
+    public static void SetInAppMessagesPauseBehaviour(InAppPauseBehaviour behaviour)
+    {
+        AndroidJavaObject reteno = GetRetenoInstance();
+        // TODO not implemented yet
+        //reteno.Call("setInAppMessagesPauseBehaviour", behaviour);
+    }
+
+    public static void SetNotificationCustomDataListener(RetenoCustomDataListener listener)
+    {
+        AndroidJavaObject customDataHandler = GetRetenoCustomDataHandlerInstance();
+        if (listener == null)
+        {
+            customDataHandler.Call("setNotificationCustomDataReceiver", null);
+        } else
+        {
+            customDataHandler.Call("setNotificationCustomDataReceiver", new CustomDataProxy(listener));
+        }
+    }
+
+    public static void SetInAppMessageCustomDataListener(RetenoCustomDataListener listener)
+    {
+        AndroidJavaObject customDataHandler = GetRetenoCustomDataHandlerInstance();
+        if (listener == null)
+        {
+            customDataHandler.Call("setNotificationCustomDataReceiver", null);
+        }
+        else
+        {
+            customDataHandler.Call("setNotificationCustomDataReceiver", new CustomDataProxy(listener));
+        }
     }
 
     private static AndroidJavaObject CreateUserObject(User user)
@@ -120,7 +157,16 @@ public class RetenoAndroid
         AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
         AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
         AndroidJavaObject context = activity.Call<AndroidJavaObject>("getApplicationContext");
-        AndroidJavaClass pluginClass = new AndroidJavaClass("com.reteno.testunity.RetenoProvider");
+        AndroidJavaClass pluginClass = new AndroidJavaClass("com.reteno.unity.RetenoProvider");
         return pluginClass.CallStatic<AndroidJavaObject>("getReteno", context);
+    }
+
+    private static AndroidJavaObject GetRetenoCustomDataHandlerInstance()
+    {
+        AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+        AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+        AndroidJavaObject context = activity.Call<AndroidJavaObject>("getApplicationContext");
+        AndroidJavaClass pluginClass = new AndroidJavaClass("com.reteno.unity.RetenoProvider");
+        return pluginClass.CallStatic<AndroidJavaObject>("getRetenoCustomDataHandler", context);
     }
 }

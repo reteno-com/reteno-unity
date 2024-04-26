@@ -40,6 +40,7 @@ public class UserDataTestScript : MonoBehaviour
         user.UserAttributes = attributes;
 
         RetenoAndroid.SetUserAttributes(user.ExternalUserId, user);
+        Debug.Log("ololo init success");
         //RetenoSdk.SetUserAttributes(user);
     }
 
