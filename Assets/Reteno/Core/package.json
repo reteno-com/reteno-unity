@@ -1,0 +1,13 @@
+{
+  "name": "com.yourcompany.reteno.core",
+  "version": "0.0.1",
+  "displayName": "RetenoSDK Core",
+  "description": "Core functionality for RetenoSDK.",
+  "unity": "2019.3",
+  "keywords": ["reteno", "core", "unity"],
+  "author": {
+    "name": "Your Company",
+    "email": "your-email@company.com",
+    "url": "https://your-company-website.com"
+  }
+}

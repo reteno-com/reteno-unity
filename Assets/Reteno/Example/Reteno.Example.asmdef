@@ -1,0 +1,17 @@
+{
+    "name": "Reteno.Example",
+    "rootNamespace": "",
+    "references": [
+        "GUID:ba91cb80af27944c8a371b0ab73f7aa6",
+        "GUID:76c53d730a38d4b55bf1045c25cd893c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

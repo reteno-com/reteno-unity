@@ -13,22 +13,22 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.reteno.testunity</string>
+	<string>com.reteno.example-app</string>
 	<key>PROJECT_ID</key>
 	<string>reteno-76f34</string>
 	<key>STORAGE_BUCKET</key>
 	<string>reteno-76f34.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:987851207632:ios:4f24d05b04a4d59abc7fd5</string>
+	<string>1:987851207632:ios:cf43500f9d1c12ecbc7fd5</string>
 </dict>
 </plist>

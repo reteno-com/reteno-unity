@@ -13,8 +13,7 @@
                 "UnityNotificationRequestAuthorizationForRemoteNotificationsOnAppLaunch",
                 "UnityRemoteNotificationForegroundPresentationOptions",
                 "UnityUseAPSReleaseEnvironment",
-                "UnityUseLocationNotificationTrigger",
-                "UnityAddTimeSensitiveEntitlement"
+                "UnityUseLocationNotificationTrigger"
             ],
             "m_Values": [
                 "True",
@@ -23,22 +22,19 @@
                 "False",
                 "-1",
                 "False",
-                "False",
                 "False"
             ]
         },
         "m_AndroidNotificationSettingsValues": {
             "m_Keys": [
                 "UnityNotificationAndroidRescheduleOnDeviceRestart",
-                "UnityNotificationAndroidScheduleExactAlarms",
                 "UnityNotificationAndroidUseCustomActivity",
                 "UnityNotificationAndroidCustomActivityString"
             ],
             "m_Values": [
                 "False",
-                "0",
                 "False",
-                "com.google.firebase.MessagingUnityPlayerActivity"
+                "com.unity3d.player.UnityPlayerActivity"
             ]
         },
         "DrawableResources": []
