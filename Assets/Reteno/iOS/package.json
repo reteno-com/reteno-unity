@@ -1,10 +1,10 @@
 {
-  "name": "com.reteno.core",
+  "name": "com.reteno.ios",
   "version": "0.0.1",
-  "displayName": "RetenoSDK Core",
+  "displayName": "RetenoSDK iOS",
   "description": "Core functionality for RetenoSDK.",
   "unity": "2019.3",
-  "keywords": ["reteno", "core", "unity"],
+  "keywords": ["reteno", "ios", "unity"],
   "author": {
     "name": "Reteno",
     "email": "your-email@company.com",
