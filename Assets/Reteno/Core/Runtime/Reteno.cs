@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using RetenoSDK.Debug;
 using RetenoSDK.Notifications;
 using RetenoSDK.User;
 
@@ -21,6 +22,11 @@ namespace RetenoSDK
                 if (Activator.CreateInstance(availableSDKs.First()) is RetenoPlatform sdk)
                 {
                     _platform = sdk;
+                    SDKDebug.Info($"Reteno set platform SDK{sdk.GetType()}");
+                }
+                else
+                {
+                    SDKDebug.Error("Could not find an implementation of Reteno SDK to use!");
                 }
 
                 return _platform;
@@ -33,7 +39,7 @@ namespace RetenoSDK
 
         public static void Initialize(string appId)
         {
-            Platform.Initialize(appId);
+           Platform.Initialize(appId);
         }
     }
 }

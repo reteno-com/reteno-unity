@@ -7,7 +7,7 @@ using RetenoSDK.User;
 
 namespace RetenoSDK.iOS
 {
-    public sealed class RetenoiOS : RetenoPlatform
+    public sealed partial class RetenoiOS : RetenoPlatform
     {
         public override INotificationsManager Notifications => _notifications;
         public override IUserManager UserManager => _userManager;
