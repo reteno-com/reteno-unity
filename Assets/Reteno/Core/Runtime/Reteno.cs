@@ -1,15 +1,15 @@
 using System;
 using System.Linq;
-using RetenoSDK.Debug;
-using RetenoSDK.Notifications;
-using RetenoSDK.User;
+using System.Reflection;
+using Reteno.Notifications;
+using Reteno.User;
+using Reteno.Debug;
+using UnityEngine;
 
-namespace RetenoSDK
+namespace Reteno
 {
     public static class Reteno
     {
-        private const string AssemblyFilter = "Reteno";
-
         private static RetenoPlatform _platform;
         public static RetenoPlatform Platform
         {
@@ -18,18 +18,38 @@ namespace RetenoSDK
                 if (_platform != null)
                     return _platform;
 
-                var availableSDKs = ReflectionHelpers.FindAllAssignableTypes<RetenoPlatform>(AssemblyFilter);
-                if (Activator.CreateInstance(availableSDKs.First()) is RetenoPlatform sdk)
+                string platformTypeName = GetPlatformName();
+                if (platformTypeName == null)
                 {
-                    _platform = sdk;
-                    SDKDebug.Info($"Reteno set platform SDK{sdk.GetType()}");
-                }
-                else
-                {
-                    SDKDebug.Error("Could not find an implementation of Reteno SDK to use!");
+                    throw new InvalidOperationException("Unsupported platform");
                 }
 
-                return _platform;
+              AppDomain current = AppDomain.CurrentDomain;
+              Assembly[] assemblies = current.GetAssemblies();
+
+              Type platformType = null;
+              
+              foreach (var assembly in assemblies)
+              {
+                  if (assembly.FullName.Contains(GetPlatformName()))
+                  {
+                      Assembly assemblyReteno = Assembly.Load(assembly.FullName);
+                      foreach (var type in assemblyReteno.GetTypes())
+                      {
+                          if (type.FullName != null && type.FullName.Contains(GetTypeName()))
+                          {
+                              platformType = type;
+                          }
+                      }
+                  }
+              }
+
+                if (platformType == null)
+                {
+                    throw new InvalidOperationException("Platform type not found: " + platformTypeName);
+                }
+                
+                return Activator.CreateInstance(platformType) as RetenoPlatform;
             }
             set => _platform = value;
         }
@@ -40,6 +60,26 @@ namespace RetenoSDK
         public static void Initialize(string appId)
         {
            Platform.Initialize(appId);
+        }
+
+        private static string GetPlatformName()
+        {
+            return ApplicationUtil.Platform switch
+            {
+                RuntimePlatform.Android => "Reteno.Android",
+                RuntimePlatform.IPhonePlayer => "Reteno.iOS",
+                _ => null
+            };
+        }
+
+        private static string GetTypeName()
+        {
+            return ApplicationUtil.Platform switch
+            {
+                RuntimePlatform.Android => "RetenoAndroid",
+                RuntimePlatform.IPhonePlayer => "RetenoiOS",
+                _ => null
+            };
         }
     }
 }

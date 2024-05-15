@@ -1,4 +1,4 @@
-namespace RetenoSDK.User
+namespace Reteno.User
 {
     public interface IUserManager
     {

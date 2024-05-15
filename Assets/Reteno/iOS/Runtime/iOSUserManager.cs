@@ -1,7 +1,7 @@
 using System.Runtime.InteropServices;
-using RetenoSDK.User;
+using Reteno.User;
 
-namespace RetenoSDK.iOS.User
+namespace Reteno.iOS.User
 {
     internal sealed class iOSUserManager : IUserManager
     {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Laters;
 
-namespace RetenoSDK.iOS.Utilities
+namespace Reteno.iOS.Utilities
 {
     internal static class WaitingProxy
     {

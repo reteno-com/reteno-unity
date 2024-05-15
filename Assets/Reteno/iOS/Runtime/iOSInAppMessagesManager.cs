@@ -1,6 +1,6 @@
-using RetenoSDK.InAppMessages;
+using Reteno.InAppMessages;
 
-namespace RetenoSDK.iOS.InAppMessages
+namespace Reteno.iOS.InAppMessages
 {
     internal sealed class iOSInAppMessagesManager : IInAppMessagesManager
     {

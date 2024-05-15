@@ -1,7 +1,7 @@
 #if UNITY_IOS
 using UnityEditor.iOS.Xcode;
 
-namespace RetenoSDK.iOS
+namespace Reteno.iOS
 {
     public static class PBXProjectExtensions
     {

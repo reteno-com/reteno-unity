@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RetenoSDK.Example
+namespace Reteno.Example
 {
     public class RetenoExample : MonoBehaviour
     {

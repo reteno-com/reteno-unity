@@ -1,6 +1,5 @@
-using RetenoSDK;
-using RetenoSDK.Notifications;
-using RetenoSDK.User;
+using Reteno.Notifications;
+using Reteno.User;
 
 namespace Reteno.Android
 {
@@ -11,7 +10,7 @@ namespace Reteno.Android
 
         public override void Initialize(string appId)
         {
-            throw new System.NotImplementedException();
+           
         }
     }
 }

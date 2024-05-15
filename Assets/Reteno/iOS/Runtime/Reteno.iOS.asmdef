@@ -1,18 +1,16 @@
 {
-  "name": "Reteno.iOS",
-  "rootNamespace": "",
-  "references": [
-    "GUID:76c53d730a38d4b55bf1045c25cd893c"
-  ],
-  "includePlatforms": [],
-  "excludePlatforms": [
-    "iOS"
-  ],
-  "allowUnsafeCode": false,
-  "overrideReferences": false,
-  "precompiledReferences": [],
-  "autoReferenced": true,
-  "defineConstraints": [],
-  "versionDefines": [],
-  "noEngineReferences": false
+    "name": "Reteno.iOS",
+    "rootNamespace": "",
+    "references": [
+        "GUID:76c53d730a38d4b55bf1045c25cd893c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
 }

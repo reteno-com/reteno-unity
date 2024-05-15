@@ -1,4 +1,4 @@
-namespace RetenoSDK.Debug
+namespace Reteno.Debug
 {
     public static class SDKDebug
     {

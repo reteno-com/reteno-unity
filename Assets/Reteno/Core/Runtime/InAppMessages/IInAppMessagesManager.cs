@@ -1,4 +1,4 @@
-namespace RetenoSDK.InAppMessages
+namespace Reteno.InAppMessages
 {
     public interface IInAppMessagesManager
     {

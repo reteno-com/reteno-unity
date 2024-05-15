@@ -1,11 +1,11 @@
 using System.Runtime.InteropServices;
-using RetenoSDK.Debug;
-using RetenoSDK.iOS.Notifications;
-using RetenoSDK.iOS.User;
-using RetenoSDK.Notifications;
-using RetenoSDK.User;
+using Reteno.Debug;
+using Reteno.iOS.Notifications;
+using Reteno.iOS.User;
+using Reteno.Notifications;
+using Reteno.User;
 
-namespace RetenoSDK.iOS
+namespace Reteno.iOS
 {
     public sealed partial class RetenoiOS : RetenoPlatform
     {

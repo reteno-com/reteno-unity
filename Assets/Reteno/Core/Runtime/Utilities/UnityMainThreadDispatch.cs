@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
-namespace RetenoSDK
+namespace Reteno
 {
     /// <summary>
     ///     Helper class for ensuring a callback is invoked on the main Unity thread

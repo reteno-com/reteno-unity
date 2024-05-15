@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace RetenoSDK
+namespace Reteno
 {
     [CreateAssetMenu(fileName = "RetenoSettings", menuName = "Reteno/Create Settings", order = 0)]
     public class RetenoSettings : ScriptableObject

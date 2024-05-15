@@ -1,6 +1,6 @@
-using RetenoSDK.Notifications;
+using Reteno.Notifications;
 
-namespace RetenoSDK.iOS.Notifications
+namespace Reteno.iOS.Notifications
 {
     internal sealed class iOSNotificationsManager : INotificationsManager
     {

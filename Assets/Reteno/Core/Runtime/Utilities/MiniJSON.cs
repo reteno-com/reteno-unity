@@ -5,7 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 
-namespace RetenoSDK
+namespace Reteno
 {
     // Forked from  https://github.com/Jackyjjc/MiniJSON.cs
     // version: 6de00beb134bbab9d873033a48b32e4067ed0c25

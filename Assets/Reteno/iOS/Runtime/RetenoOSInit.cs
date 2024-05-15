@@ -1,7 +1,7 @@
-#if UNITY_IOS && !UNITY_EDITOR 
+#if UNITY_IOS
 using UnityEngine;
 
-namespace RetenoSDK.iOS {
+namespace Reteno.iOS {
     /// <summary>
     /// 
     /// </summary>

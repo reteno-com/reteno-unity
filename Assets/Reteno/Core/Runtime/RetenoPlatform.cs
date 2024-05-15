@@ -1,8 +1,8 @@
 using System;
-using RetenoSDK.Notifications;
-using RetenoSDK.User;
+using Reteno.Notifications;
+using Reteno.User;
 
-namespace RetenoSDK
+namespace Reteno
 {
     public abstract class RetenoPlatform
     {

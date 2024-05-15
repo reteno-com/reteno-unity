@@ -10,7 +10,7 @@ using UnityEditor.iOS.Xcode;
 using UnityEditor.iOS.Xcode.Extensions;
 using Debug = UnityEngine.Debug;
 
-namespace RetenoSDK.iOS
+namespace Reteno.iOS
 {
     /// <summary>
     ///     Adds required frameworks to the iOS project, and adds the RetenoNotificationServiceExtension. Also handles

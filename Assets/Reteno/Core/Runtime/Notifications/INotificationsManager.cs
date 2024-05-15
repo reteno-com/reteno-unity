@@ -1,4 +1,4 @@
-namespace RetenoSDK.Notifications
+namespace Reteno.Notifications
 {
     public interface INotificationsManager
     {
