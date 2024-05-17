@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools">
+  <application android:name="com.reteno.unity.RetenoApp">
+    <receiver
+        android:name="com.reteno.unity.RetenoNotificationClickedReceiver"
+        android:enabled="true"
+        android:exported="true"/>
+
+    <meta-data
+        android:name="com.reteno.Receiver.NotificationClicked"
+        android:value="com.reteno.unity.RetenoNotificationClickedReceiver" />
+
+    <receiver
+        android:name="com.reteno.unity.RetenoInAppMessageCustomDataReceiver"
+        android:enabled="true"
+        android:exported="false" >
+      <intent-filter>
+        <action android:name="com.reteno.custom-inapp-data" />
+      </intent-filter>
+    </receiver>
+    </application>
+</manifest>

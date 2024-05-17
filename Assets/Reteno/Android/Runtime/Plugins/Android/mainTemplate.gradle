@@ -3,11 +3,6 @@ apply plugin: 'com.android.library'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.work:work-runtime-ktx:2.8.1'
-    implementation 'androidx.cardview:cardview:1.0.0'
-    implementation "net.zetetic:android-database-sqlcipher:4.5.2"
-    implementation "com.reteno:fcm:2.0.3"
-    api "com.google.code.gson:gson:2.10.1"
 
 // Android Resolver Dependencies Start
     implementation 'com.google.android.gms:play-services-base:18.2.0' // Assets/Firebase/Editor/AppDependencies.xml:17

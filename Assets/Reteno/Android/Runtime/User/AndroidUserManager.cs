@@ -3,18 +3,10 @@ using UnityEngine;
 
 namespace Reteno.Android.User
 {
-    public class UserManager : IUserManager
+    public class AndroidUserManager : IUserManager
     {
         public string UserId { get; }
-      
-        public void AddUserId(string userId)
-        {
-        }
         
-        /// <summary>
-        /// Sets the user attributes using the specified user
-        /// </summary>
-        /// <param name="user">The user</param>
         public void SetUserAttributes(string externalUserId, global::Reteno.User.User user)
         {
             AndroidJavaObject userJava = CreateUserObject(user);
@@ -22,10 +14,6 @@ namespace Reteno.Android.User
             reteno.Call("setUserAttributes", externalUserId, userJava);
         }
         
-        /// <summary>
-        /// Sets the anonymous user attributes using the specified user
-        /// </summary>
-        /// <param name="user">The user</param>
         public void SetAnonymousUserAttributes(global::Reteno.User.User user)
         {
             AndroidJavaObject userJava = CreateUserObject(user);

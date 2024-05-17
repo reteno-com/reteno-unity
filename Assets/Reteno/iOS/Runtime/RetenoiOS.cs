@@ -1,5 +1,7 @@
 using System.Runtime.InteropServices;
 using Reteno.Debug;
+using Reteno.Events;
+using Reteno.InAppMessages;
 using Reteno.iOS.Notifications;
 using Reteno.iOS.User;
 using Reteno.Notifications;
@@ -11,6 +13,8 @@ namespace Reteno.iOS
     {
         public override INotificationsManager Notifications => _notifications;
         public override IUserManager UserManager => _userManager;
+        public override IInAppMessagesManager InAppMessagesManager { get; }
+        public override IEventManager EventManager { get; }
 
         private static RetenoiOS _instance;
         private iOSNotificationsManager _notifications;

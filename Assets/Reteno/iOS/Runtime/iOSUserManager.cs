@@ -9,14 +9,17 @@ namespace Reteno.iOS.User
         public iOSUserManager() => _instance = this;
 
         public string UserId { get; private set; }
-        
+      
         [DllImport("__Internal")]
         private static extern void SetUserDataWithuserId(string userId);
-
-        public void AddUserId(string userId)
+      
+        public void SetUserAttributes(string externalUserId, global::Reteno.User.User user)
         {
-            UserId = userId;
-            SetUserDataWithuserId(userId);
+            
+        }
+
+        public void SetAnonymousUserAttributes(global::Reteno.User.User user)
+        {
         }
     }
 }

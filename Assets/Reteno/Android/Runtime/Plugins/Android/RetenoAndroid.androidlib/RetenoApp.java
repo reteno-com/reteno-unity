@@ -17,7 +17,7 @@ public class RetenoApp extends Application implements RetenoApplication, RetenoU
     @Override
     public void onCreate() {
         super.onCreate();
-        retenoInstance = new RetenoImpl(this, "f46c32c6-7d5e-4439-bba5-ce36ead04fc9");
+        retenoInstance = new RetenoImpl(this);
         retenoCustomDataHandler = new RetenoCustomDataHandler();
     }
 

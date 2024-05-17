@@ -1,4 +1,6 @@
 using System;
+using Reteno.Events;
+using Reteno.InAppMessages;
 using Reteno.Notifications;
 using Reteno.User;
 
@@ -11,6 +13,8 @@ namespace Reteno
 
         public abstract INotificationsManager Notifications { get; }
         public abstract IUserManager UserManager { get; }
+        public abstract IInAppMessagesManager InAppMessagesManager { get; }
+        public abstract IEventManager EventManager { get; }
 
         internal static event Action<string> OnInitialize;
 
@@ -26,6 +30,10 @@ namespace Reteno
             OnInitialize?.Invoke(appId);
         }
 
+        /// <summary>
+        /// Enter point to Initialize Reteno
+        /// </summary>
+        /// <param name="appId"></param>
         public abstract void Initialize(string appId);
     }
 }

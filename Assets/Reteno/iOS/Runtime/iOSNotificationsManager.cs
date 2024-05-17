@@ -14,5 +14,10 @@ namespace Reteno.iOS.Notifications
         public void Initialize()
         {
         }
+
+        public void SetNotificationCustomDataListener(RetenoCustomDataListener listener)
+        {
+            
+        }
     }
 }

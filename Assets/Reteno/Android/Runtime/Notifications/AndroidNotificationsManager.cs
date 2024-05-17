@@ -9,7 +9,7 @@ namespace Reteno.Android
         {
         }
         
-        public static void SetNotificationCustomDataListener(RetenoCustomDataListener listener)
+        public void SetNotificationCustomDataListener(RetenoCustomDataListener listener)
         {
             AndroidJavaObject customDataHandler = RetenoJavaInstance.GetCustomDataHandler();
             if (listener == null)

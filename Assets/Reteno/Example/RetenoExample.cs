@@ -6,7 +6,7 @@ namespace Reteno.Example
     {
         public void SetUserId()
         {
-            Reteno.UserManager.AddUserId("userid_unity_ios" + Random.Range(0, 10000));
+          //  Reteno.UserManager.AddUserId("userid_unity_ios" + Random.Range(0, 10000));
         }
     }
 }

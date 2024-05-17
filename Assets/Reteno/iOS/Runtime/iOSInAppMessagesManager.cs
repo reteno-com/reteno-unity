@@ -10,5 +10,17 @@ namespace Reteno.iOS.InAppMessages
         {
             _instance = this;
         }
+
+        public void PauseInAppMessages(bool isPaused)
+        {
+        }
+
+        public void SetInAppMessagesPauseBehaviour(InAppPauseBehaviour behaviour)
+        {
+        }
+
+        public void SetInAppMessageCustomDataListener(RetenoCustomDataListener listener)
+        {
+        }
     }
 }
