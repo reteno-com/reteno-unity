@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Reteno.Android
 {
-    public class RetenoJavaInstance
+    public static class RetenoJavaInstance
     {
         public static AndroidJavaObject Get()
         {
