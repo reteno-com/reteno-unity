@@ -1,13 +1,35 @@
 {
   "name": "com.reteno.core",
-  "version": "0.0.1",
-  "displayName": "RetenoSDK Core",
-  "description": "Core functionality for RetenoSDK.",
-  "unity": "2019.3",
-  "keywords": ["reteno", "core", "unity"],
+  "displayName": "RetenoSDK - Core",
+  "version": "1.0.0",
+  "unity": "2018.4",
+  "description": "Make Users Addicted to Your App, turn idle users into habitues with timely and personalized push notifications, in-app, app inbox, email, SMS, and more",
+  "dependencies": {
+  },
+  "keywords": [
+    "push-notifications",
+    "notification-service",
+    "notifications",
+    "sdk",
+    "pushnotificaitions",
+    "apns",
+    "gcm"
+  ],
+  "license": "MIT",
   "author": {
     "name": "Reteno",
-    "email": "your-email@company.com",
-    "url": "https://your-company-website.com"
-  }
+    "email": "support@reteno.com",
+    "url": "https://reteno.com/"
+  },
+  "homepage": "https://reteno.com/",
+  "bugs": {
+    "url": "https://github.com/reteno-com/reteno-unity/issues",
+    "email": "support@reteno.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:reteno-com/reteno-unity.git"
+  },
+  "samples": [
+  ]
 }
