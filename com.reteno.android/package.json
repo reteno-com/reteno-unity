@@ -1,0 +1,13 @@
+{
+  "name": "com.reteno.android",
+  "version": "0.0.1",
+  "displayName": "RetenoSDK Android",
+  "description": "Android functionality for RetenoSDK.",
+  "unity": "2019.3",
+  "keywords": ["reteno", "android", "unity"],
+  "author": {
+    "name": "Reteno",
+    "email": "your-email@company.com",
+    "url": "https://your-company-website.com"
+  }
+}
