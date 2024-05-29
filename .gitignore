@@ -1,1 +1,7 @@
 .idea/
+
+# Mac
+# General
+*.DS_Store
+*.AppleDouble
+*.LSOverride
