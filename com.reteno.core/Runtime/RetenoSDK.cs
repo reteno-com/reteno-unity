@@ -86,7 +86,7 @@ namespace Reteno.Core
         /// <summary>
         /// Requests the user for push notification permissions and handles the callbacks.
         /// </summary>
-        public static void RequestPush(Action onPermissionGranted = null, Action onPermissionDenied = null, Action onPermissionDeniedAndDontAskAgain = null) =>
+        public static void RequestPushPermission(Action onPermissionGranted = null, Action onPermissionDenied = null, Action onPermissionDeniedAndDontAskAgain = null) =>
             PushNotificationPermissionManager.RequestPush(onPermissionGranted, onPermissionDenied, onPermissionDeniedAndDontAskAgain);
 
         /// <summary>

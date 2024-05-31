@@ -1,5 +1,4 @@
 using System;
-using Reteno.Debug;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
@@ -16,7 +15,7 @@ namespace Reteno.Android.Editor
         {
             if (report.summary.platform == BuildTarget.Android)
             {
-                SDKDebug.Info("Post-process build for Android platform.");
+                UnityEngine.Debug.Log("Post-process build for Android platform.");
                 string buildPath = report.summary.outputPath;
                 ModifyGradleBuildFiles(buildPath);
                 ModifyAndroidManifest(buildPath);
@@ -49,21 +48,21 @@ namespace Reteno.Android.Editor
                     {
                         gradleContent = gradleContent.Insert(endOfDependenciesIndex, dependenciesToAdd);
                         File.WriteAllText(gradleBuildFilePath, gradleContent);
-                        SDKDebug.Info("Gradle build file modified with new dependencies.");
+                        UnityEngine.Debug.Log("Gradle build file modified with new dependencies.");
                     }
                     else
                     {
-                        SDKDebug.Warn("Could not find the end of the dependencies block.");
+                        UnityEngine.Debug.LogWarning("Could not find the end of the dependencies block.");
                     }
                 }
                 else
                 {
-                    SDKDebug.Warn("Could not find the dependencies block.");
+                    UnityEngine.Debug.LogWarning("Could not find the dependencies block.");
                 }
             }
             else
             {
-                SDKDebug.Warn($"Gradle build file not found at path: {gradleBuildFilePath}");
+                UnityEngine.Debug.LogWarning($"Gradle build file not found at path: {gradleBuildFilePath}");
             }
         }
 
@@ -87,21 +86,21 @@ namespace Reteno.Android.Editor
                         applicationNode.Attributes.Append(nameAttribute);
 
                         manifestDoc.Save(manifestPath);
-                        SDKDebug.Info("Android manifest file modified with new application name attribute.");
+                        UnityEngine.Debug.Log("Android manifest file modified with new application name attribute.");
                     }
                     else
                     {
-                        SDKDebug.Warn("Application node not found in the Android manifest file.");
+                        UnityEngine.Debug.LogWarning("Application node not found in the Android manifest file.");
                     }
                 }
                 else
                 {
-                    SDKDebug.Warn("Manifest node not found in the Android manifest file.");
+                    UnityEngine.Debug.LogWarning("Manifest node not found in the Android manifest file.");
                 }
             }
             else
             {
-                SDKDebug.Warn($"Android manifest file not found at path: {manifestPath}");
+                UnityEngine.Debug.LogWarning($"Android manifest file not found at path: {manifestPath}");
             }
         }
     }

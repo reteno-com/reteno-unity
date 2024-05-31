@@ -1,17 +1,15 @@
 {
-    "name": "Reteno.Android",
+    "name": "Reteno.Android.Editor",
     "rootNamespace": "",
-    "references": [
-        "Reteno.Core"
-    ],
+    "references": [],
     "includePlatforms": [
-        "Android"
+        "Editor"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": false,
+    "autoReferenced": true,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false
