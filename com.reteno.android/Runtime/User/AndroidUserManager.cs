@@ -19,9 +19,9 @@ namespace Reteno.Android.Users
             reteno.Call("setUserAttributes", externalUserId, userJava);
         }
         
-        public void SetAnonymousUserAttributes(User user)
+        public void SetAnonymousUserAttributes(UserAttributesAnonymous userAttributesAnonymous)
         {
-            AndroidJavaObject userJava = CreateUserObject(user);
+            AndroidJavaObject userJava = CreateUserAnonymousObject(userAttributesAnonymous);
             AndroidJavaObject reteno = RetenoJavaInstance.Get();
             reteno.Call("setAnonymousUserAttributes", userJava);
         }
@@ -61,6 +61,33 @@ namespace Reteno.Android.Users
             );
 
             return userJava;
+        }
+        
+        private AndroidJavaObject CreateUserAnonymousObject(UserAttributesAnonymous userAttributesAnonymous)
+        {
+            AndroidJavaObject addressJava = null;
+            if (userAttributesAnonymous.Address != null)
+            {
+                addressJava = new AndroidJavaObject(
+                    "com.reteno.core.domain.model.user.Address",
+                    userAttributesAnonymous.Address.Region,
+                    userAttributesAnonymous.Address.Town,
+                    userAttributesAnonymous.Address.Address,
+                    userAttributesAnonymous.Address.Postcode
+                );
+            }
+
+            AndroidJavaObject userAttributesJava = new AndroidJavaObject(
+                "com.reteno.core.domain.model.user.UserAttributesAnonymous",
+                userAttributesAnonymous.FirstName,
+                userAttributesAnonymous.LastName,
+                userAttributesAnonymous.LanguageCode,
+                userAttributesAnonymous.TimeZone,
+                addressJava,
+                userAttributesAnonymous.Fields
+            );
+            
+            return userAttributesJava;
         }
     }
 }

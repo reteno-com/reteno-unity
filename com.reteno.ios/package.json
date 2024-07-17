@@ -1,11 +1,11 @@
 {
-  "name": "com.reteno.android",
-  "displayName": "RetenoSDK - Android",
+  "name": "com.reteno.iOS",
+  "displayName": "RetenoSDK - iOS",
   "version": "1.0.3",
   "unity": "2018.4",
   "description": "Make Users Addicted to Your App, turn idle users into habitues with timely and personalized push notifications, in-app, app inbox, email, SMS, and more",
   "dependencies": {
-    "com.reteno.core": "1.0.3"
+  "com.reteno.core": "1.0.3"
   },
   "keywords": [
     "push-notifications",
@@ -14,8 +14,7 @@
     "sdk",
     "pushnotificaitions",
     "apns",
-    "gcm",
-    "android"
+    "gcm"
   ],
   "license": "MIT",
   "author": {

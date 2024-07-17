@@ -17,7 +17,7 @@ namespace Reteno.Android
 
         public override INotificationsManager Notifications => _androidNotifications;
         public override IUserManager UserManager => _androidUserManager;
-        public override IPushNotificationPermissionManager PushAndroidPushNotificationPermissionManagerManager => _androidPushNotificationPermissionManager;
+        public override IPushNotificationPermissionManager PushNotificationPermissionManager => _androidPushNotificationPermissionManager;
         public override IInAppMessagesManager InAppMessagesManager => _androidInAppMessages;
         public override IEventManager EventManager => _androidEventManager;
 

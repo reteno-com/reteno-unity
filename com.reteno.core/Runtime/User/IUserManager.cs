@@ -12,6 +12,6 @@ namespace Reteno.Users
         /// Sets the anonymous user attributes using the specified user
         /// </summary>
         /// <param name="user">The user</param>
-        void SetAnonymousUserAttributes(User user);
+        void SetAnonymousUserAttributes(UserAttributesAnonymous userAttributesAnonymous);
     }
 }

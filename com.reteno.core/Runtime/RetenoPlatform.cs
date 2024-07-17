@@ -13,7 +13,7 @@ namespace Reteno.Core
 
         public abstract INotificationsManager Notifications { get; }
         public abstract IUserManager UserManager { get; }
-        public abstract IPushNotificationPermissionManager PushAndroidPushNotificationPermissionManagerManager { get; }
+        public abstract IPushNotificationPermissionManager PushNotificationPermissionManager { get; }
         public abstract IInAppMessagesManager InAppMessagesManager { get; }
         public abstract IEventManager EventManager { get; }
 

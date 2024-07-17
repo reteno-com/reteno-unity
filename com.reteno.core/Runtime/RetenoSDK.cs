@@ -60,7 +60,7 @@ namespace Reteno.Core
         private static INotificationsManager Notifications => Platform.Notifications;
         private static IUserManager UserManager => Platform.UserManager;
         private static IPushNotificationPermissionManager PushNotificationPermissionManager =>
-            Platform.PushAndroidPushNotificationPermissionManagerManager;
+            Platform.PushNotificationPermissionManager;
         private static IEventManager EventManager => Platform.EventManager;
 
         /// <summary>
@@ -80,8 +80,8 @@ namespace Reteno.Core
         /// Sets the anonymous user attributes using the specified user
         /// </summary>
         /// <param name="user">The user</param>
-        public static void SetAnonymousUserAttributes(User user) =>
-            UserManager.SetAnonymousUserAttributes(user);
+        public static void SetAnonymousUserAttributes(UserAttributesAnonymous userAttributesAnonymous) =>
+            UserManager.SetAnonymousUserAttributes(userAttributesAnonymous);
 
         /// <summary>
         /// Requests the user for push notification permissions and handles the callbacks.

@@ -19,5 +19,10 @@ namespace Reteno.Events
         /// Gets or sets the value of the params
         /// </summary>
         public List<Parameter> Parameters { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the value of the force push
+        /// </summary>
+        public bool ForcePush { get; set; }
     }
 }
