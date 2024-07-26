@@ -1,7 +1,7 @@
 {
   "name": "com.reteno.ios",
   "displayName": "RetenoSDK - iOS",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "unity": "2018.4",
   "description": "Make Users Addicted to Your App, turn idle users into habitues with timely and personalized push notifications, in-app, app inbox, email, SMS, and more",
   "dependencies": {
