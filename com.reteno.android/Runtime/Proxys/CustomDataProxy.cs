@@ -2,36 +2,39 @@ using System.Collections.Generic;
 using Reteno.Android.Utilities;
 using UnityEngine;
 
-public class CustomDataProxy : AndroidJavaProxy
+namespace Reteno.Android
 {
-    private RetenoCustomDataListener listener;
-
-    public CustomDataProxy(RetenoCustomDataListener listener) : base("com.reteno.unity.RetenoCustomDataListener")
+    public class CustomDataProxy : AndroidJavaProxy
     {
-        this.listener = listener;
-    }
+        private RetenoCustomDataListener listener;
 
-    public void onCustomDataReceived(AndroidJavaObject hashMap)
-    {
-        listener.OnCustomDataReceived(ParseHashMap(hashMap));
-    }
-
-    private Dictionary<string, string> ParseHashMap(AndroidJavaObject hashMap)
-    {
-        Dictionary<string, string> customData = new Dictionary<string, string>();
-
-        AndroidJavaObject entrySet = hashMap.Call<AndroidJavaObject>("entrySet");
-        AndroidJavaObject iterator = entrySet.Call<AndroidJavaObject>("iterator");
-        AndroidJavaObject entry;
-
-        while (iterator.Call<bool>("hasNext"))
+        public CustomDataProxy(RetenoCustomDataListener listener) : base("com.reteno.unity.RetenoCustomDataListener")
         {
-            entry = iterator.Call<AndroidJavaObject>("next");
-            string key = entry.Call<string>("getKey");
-            string value = entry.Call<string>("getValue");
-            customData.Add(key, value);
+            this.listener = listener;
         }
 
-        return customData;
+        public void onCustomDataReceived(AndroidJavaObject hashMap)
+        {
+            listener.OnCustomDataReceived(ParseHashMap(hashMap));
+        }
+
+        private Dictionary<string, string> ParseHashMap(AndroidJavaObject hashMap)
+        {
+            Dictionary<string, string> customData = new Dictionary<string, string>();
+
+            AndroidJavaObject entrySet = hashMap.Call<AndroidJavaObject>("entrySet");
+            AndroidJavaObject iterator = entrySet.Call<AndroidJavaObject>("iterator");
+            AndroidJavaObject entry;
+
+            while (iterator.Call<bool>("hasNext"))
+            {
+                entry = iterator.Call<AndroidJavaObject>("next");
+                string key = entry.Call<string>("getKey");
+                string value = entry.Call<string>("getValue");
+                customData.Add(key, value);
+            }
+
+            return customData;
+        }
     }
 }

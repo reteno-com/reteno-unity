@@ -8,9 +8,16 @@ import FirebaseMessaging
     @objc public static let shared = InitializationModel()
     
     private override init() {
-           super.init()
-           FirebaseApp.configure()
-           Messaging.messaging().delegate = self
+        super.init()
+        
+        if FirebaseApp.app() == nil {
+                FirebaseApp.configure()
+                print("Configured Firebase")
+            } else {
+                print("Firebase has already been configured.")
+            }
+            
+            Messaging.messaging().delegate = self
     }
     
     @objc public func start(apikey: String)
@@ -34,8 +41,7 @@ import FirebaseMessaging
         )
     }
     @objc public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-        print("Try get messaging: \(Messaging.messaging().fcmToken)")
-        
+      
         guard let fcmToken = Messaging.messaging().fcmToken else { return }
         
         print("FCM device token: ", fcmToken)

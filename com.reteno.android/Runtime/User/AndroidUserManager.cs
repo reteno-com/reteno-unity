@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Reteno.Users;
 using UnityEngine;
 
@@ -28,6 +29,12 @@ namespace Reteno.Android.Users
         
         private AndroidJavaObject CreateUserObject(User user)
         {
+            var paramsList = new AndroidJavaObject("java.util.ArrayList");
+            foreach(Field param in user.UserAttributes.Fields)
+            {
+                paramsList.Call<bool>("add",GetFieldParameter(param));
+            }
+            
             AndroidJavaObject addressJava = null;
             if (user.UserAttributes.Address != null)
             {
@@ -49,22 +56,47 @@ namespace Reteno.Android.Users
                 user.UserAttributes.LanguageCode,
                 user.UserAttributes.TimeZone,
                 addressJava,
-                user.UserAttributes.Fields
+                paramsList
             );
             
             AndroidJavaObject userJava = new AndroidJavaObject(
                 "com.reteno.core.domain.model.user.User",
                 userAttributesJava,
-                user.SubscriptionKeys,
-                user.GroupNamesInclude,
-                user.GroupNamesExclude
+                GetArrayListFrom(user.SubscriptionKeys),
+                GetArrayListFrom(user.GroupNamesInclude),
+                GetArrayListFrom(user.GroupNamesExclude)
             );
 
             return userJava;
         }
         
+        AndroidJavaObject GetArrayListFrom(List<string> inputList)
+        {
+            var paramsList = new AndroidJavaObject("java.util.ArrayList");
+            foreach (var element in inputList)
+            {
+                paramsList.Call<bool>("add", element);
+            }
+
+            return paramsList;
+        }
+        
+        private AndroidJavaObject GetFieldParameter(Field field)
+        {
+            return new AndroidJavaObject("com.reteno.core.domain.model.user.UserCustomField",
+                field.Key,
+                field.Value
+            );
+        }
+        
         private AndroidJavaObject CreateUserAnonymousObject(UserAttributesAnonymous userAttributesAnonymous)
         {
+            var paramsList = new AndroidJavaObject("java.util.ArrayList");
+            foreach(Field param in userAttributesAnonymous.Fields)
+            {
+                paramsList.Call<bool>("add",GetFieldParameter(param));
+            }
+            
             AndroidJavaObject addressJava = null;
             if (userAttributesAnonymous.Address != null)
             {
@@ -84,7 +116,7 @@ namespace Reteno.Android.Users
                 userAttributesAnonymous.LanguageCode,
                 userAttributesAnonymous.TimeZone,
                 addressJava,
-                userAttributesAnonymous.Fields
+                paramsList
             );
             
             return userAttributesJava;

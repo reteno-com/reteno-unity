@@ -29,19 +29,21 @@ namespace Reteno.Core
                 Assembly[] assemblies = current.GetAssemblies();
 
                 Type platformType = null;
-              
+      
                 foreach (var assembly in assemblies)
                 {
-                    if (assembly.FullName.Contains(ApplicationUtil.GetPlatformName()))
+                    if (assembly.FullName.Contains(platformTypeName))
                     {
                         Assembly assemblyReteno = Assembly.Load(assembly.FullName);
                         foreach (var type in assemblyReteno.GetTypes())
                         {
-                            if (type.FullName != null && type.FullName.Contains(ApplicationUtil.GetTypeName()))
+                            if (type.FullName != null && type.FullName.EndsWith(ApplicationUtil.GetTypeName()))
                             {
                                 platformType = type;
+                                break; // Exit the loop once the correct type is found
                             }
                         }
+                        if (platformType != null) break; // Exit the outer loop if the type is already found
                     }
                 }
 
@@ -49,7 +51,7 @@ namespace Reteno.Core
                 {
                     throw new InvalidOperationException("Platform type not found: " + platformTypeName);
                 }
-                
+        
                 return Activator.CreateInstance(platformType) as RetenoPlatform;
             }
             set => _platform = value;

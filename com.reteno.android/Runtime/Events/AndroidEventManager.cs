@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using Reteno.Android.Utilities;
 using Reteno.Events;
@@ -12,14 +13,18 @@ namespace Reteno.Android.Events
     {
         public void LogEvent(CustomEvent customEvent)
         {
-            List<AndroidJavaObject> paramsList = new List<AndroidJavaObject>();
+            var paramsList = new AndroidJavaObject("java.util.ArrayList");
             foreach(Parameter param in customEvent.Parameters)
             {
-                paramsList.Add(GetEventParameter(param));
+                paramsList.Call<bool>("add",GetEventParameter(param));
             }
 
-            AndroidJavaObject retenoEvent = new AndroidJavaObject(
-                "com.reteno.core.domain.model.event.Event.Custom",
+            AndroidJavaClass retenoHelper = new AndroidJavaClass(
+                "com.reteno.unity.RetenoUnityHelper"
+            );
+
+            AndroidJavaObject retenoEvent = retenoHelper.CallStatic<AndroidJavaObject>(
+                "createCustomEvent",
                 customEvent.EventTypeKey,
                 customEvent.OccurredDate.ToAndroidJavaObject(),
                 paramsList

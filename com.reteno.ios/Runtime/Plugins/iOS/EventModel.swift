@@ -4,17 +4,18 @@ import Reteno
 @objcMembers
 public class EventModel: NSObject {
     
-    public static func logEvent(eventTypeKey: String, parameters: [EventData.Parameter], forcePush: Bool = false) {
-        
+    public static func logEvent(eventTypeKey: String, parameters: [NSDictionary], forcePush: Bool = false) {
+     
         var retenoParameters: [Event.Parameter] = []
-       
-        for parameter in parameters {
-            let convertedParameter = Event.Parameter(name: parameter.name, value: parameter.value)
-                  retenoParameters.append(convertedParameter)
+        for dict in parameters {
+            if let name = dict["name"] as? String, let value = dict["value"] as? String {
+                let convertedParameter = Event.Parameter(name: name, value: value)
+                retenoParameters.append(convertedParameter)
+            }
         }
+        
 
         Reteno.logEvent(eventTypeKey: eventTypeKey, parameters: retenoParameters, forcePush: forcePush)
-        
-        print("Logging event: \(eventTypeKey),Parameters: \(parameters), ForcePush: \(forcePush)")
+        print("Logging event: \(eventTypeKey), Parameters: \(retenoParameters), Force Push: \(forcePush)")
     }
 }

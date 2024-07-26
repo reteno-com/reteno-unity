@@ -8,8 +8,7 @@
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ssZ"];
-
-
+    
     NSMutableArray *parameters = [[NSMutableArray alloc] init];
     for (int i = 0; i < count; i++) {
         NSString *name = [NSString stringWithUTF8String:names[i]];
