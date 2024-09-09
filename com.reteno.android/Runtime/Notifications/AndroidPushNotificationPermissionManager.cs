@@ -9,8 +9,12 @@ namespace Reteno.Notifications
     /// </summary>
     public class AndroidPushNotificationPermissionManager : IPushNotificationPermissionManager
     {
+        public void Initialize()
+        {
+        }
+
         public void RequestPush(Action onPermissionGranted = null, 
-            Action onPermissionDenied = null, Action onPermissionDeniedAndDontAskAgain = null)
+            Action onPermissionDenied = null, Action onPermissionDeniedAndDontAskAgain = null, Action<string> onDataReceived = null)
         {
             var callbacks = new PermissionCallbacks();
             callbacks.PermissionGranted += CallbacksOnPermissionGranted;

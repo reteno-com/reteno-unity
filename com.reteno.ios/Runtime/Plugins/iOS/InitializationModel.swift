@@ -6,40 +6,47 @@ import FirebaseMessaging
 @objc public class InitializationModel : NSObject, MessagingDelegate
 {
     @objc public static let shared = InitializationModel()
+    private var notificationPermissionCallback: ((Bool) -> Void)?
     
     private override init() {
         super.init()
-        
+            Messaging.messaging().delegate = self
+    }
+    
+    @objc public func start(apikey: String)
+    {
+        Reteno.delayedSetup(apiKey: apikey)
+    }
+    
+    @objc public func delayStart()
+    {
         if FirebaseApp.app() == nil {
                 FirebaseApp.configure()
                 print("Configured Firebase")
             } else {
                 print("Firebase has already been configured.")
             }
-            
-            Messaging.messaging().delegate = self
-    }
-    
-    @objc public func start(apikey: String)
-    {
-        Reteno.start(apiKey: apikey)
+        
+        Reteno.delayedStart();
     }
     
     @objc public func registerForNotifications()
     {
-        Reteno.userNotificationService.registerForRemoteNotifications { granted in
-            //let grantedString = String(granted)
-            //self.sendUnityMessage(gameObject: "iOSPushNotificationPermissionManager", methodName: "ChangePermissionStatus", message: //grantedString)
+        Reteno.userNotificationService.registerForRemoteNotifications {[weak self] granted in
+            self?.notificationPermissionCallback?(granted)
         };
     }
     
-   @objc func sendUnityMessage(gameObject: String, methodName: String, message: String) {
-        UnityFramework.getInstance()?.sendMessageToGO(
-            withName: gameObject,
-            functionName: methodName,
-            message: message
-        )
+    @objc public func didReceiveNotificationUserInfo(_ callback: @escaping ([AnyHashable: Any]) -> Void)
+    {
+        Reteno.userNotificationService.didReceiveNotificationUserInfo = callback
     }
+    
+    @objc public func notificationsAddPermissionCallback(_ callback: @escaping (Bool) -> Void)
+    {
+        self.notificationPermissionCallback = callback
+    }
+
     @objc public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
       
         guard let fcmToken = Messaging.messaging().fcmToken else { return }

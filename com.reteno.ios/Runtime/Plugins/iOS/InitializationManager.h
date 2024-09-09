@@ -10,6 +10,8 @@ extern "C" {
 
     void startReteno(const char* apiKey, bool debugMode);
     void registerForNotifications(void);
+    void notificationsAddPermissionCallback(void(*callback)(bool));
+    void registerNotificationCallback(void(*callback)(const char*));
 
     #ifdef __cplusplus
 }
@@ -19,6 +21,10 @@ extern "C" {
 
 + (void)startRetenoWithApiKey:(NSString *)apiKey debugMode:(BOOL)debugMode;
 + (void)registerForNotifications;
++ (void)delayStartReteno;
++ (void)notificationsAddPermissionCallback:(void(^)(BOOL))callback;
++ (void)registerNotificationCallback:(void(^)(NSDictionary *))callback;
++ (NSString *)serializeDictionaryToJSON:(NSDictionary *)userInfo;
 
 @end
 

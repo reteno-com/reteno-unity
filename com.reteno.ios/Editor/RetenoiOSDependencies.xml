@@ -1,5 +1,5 @@
 ﻿<dependencies>
     <iosPods>
-        <iosPod name="Reteno" version="2.0.9" addToAllTargets="false" />
+        <iosPod name="Reteno" version="2.0.12" addToAllTargets="false" />
     </iosPods>
 </dependencies>

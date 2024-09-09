@@ -35,7 +35,7 @@ namespace Reteno.Android.Editor
                 string dependenciesToAdd = @"
                 implementation 'androidx.work:work-runtime-ktx:2.8.1'
                 implementation 'androidx.cardview:cardview:1.0.0'
-                implementation 'com.reteno:fcm:2.0.10'
+                implementation 'com.reteno:fcm:2.0.13'
                 api 'com.google.code.gson:gson:2.10.1'
                 ";
 
