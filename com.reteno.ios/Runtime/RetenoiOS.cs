@@ -41,8 +41,11 @@ namespace Reteno.iOS
             _iOSNotificationsManager = new iOSNotificationsManager();
             _iOSUserManager = new iOSUserManager();
             _iOSInAppMessages = new iOSInAppMessagesManager();
+            _iOSInAppMessages.Initialize();
+
             _iOSEventManager = new iOSEventManager();
             _iOSPushNotificationPermissionManager = new iOSPushNotificationPermissionManager();
+            _iOSPushNotificationPermissionManager.Initialize();
         
             SDKDebug.Info( "End init");
         }

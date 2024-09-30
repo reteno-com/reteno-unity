@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Reteno.Android.Utilities;
 using Reteno.InAppMessages;
 using UnityEngine;
@@ -9,6 +11,12 @@ namespace Reteno.Android.InAppMessages
     /// </summary>
     public class AndroidInAppMessagesManager : IInAppMessagesManager
     {
+        public event Action<Dictionary<string, string>> CustomData;
+
+        public void Initialize()
+        {
+        }
+
         public void PauseInAppMessages(bool isPaused)
         {
             AndroidJavaObject reteno = RetenoJavaInstance.Get();
@@ -18,8 +26,10 @@ namespace Reteno.Android.InAppMessages
         public void SetInAppMessagesPauseBehaviour(InAppPauseBehaviour behaviour)
         {
             AndroidJavaObject reteno = RetenoJavaInstance.Get();
-            //TODO WIP
-            //reteno.Call("setInAppMessagesPauseBehaviour", behaviour);
+            
+            AndroidJavaObject enumObj = new AndroidJavaObject("com.reteno.core.features.iam.InAppPauseBehaviour");
+            AndroidJavaClass enumValue = enumObj.CallStatic<AndroidJavaClass>("valueOf");
+            reteno.Call("setPushInAppMessagesPauseBehaviour", enumValue);
         }
 
         public void SetInAppMessageCustomDataListener(RetenoCustomDataListener listener)

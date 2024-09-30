@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Reteno.Notifications;
 using Reteno.Users;
 using Reteno.Events;
+using Reteno.InAppMessages;
 using Reteno.Utilities;
 
 namespace Reteno.Core
@@ -64,13 +66,23 @@ namespace Reteno.Core
         private static IPushNotificationPermissionManager PushNotificationPermissionManager =>
             Platform.PushNotificationPermissionManager;
         private static IEventManager EventManager => Platform.EventManager;
+        private static IInAppMessagesManager InAppMessagesManager => Platform.InAppMessagesManager;
+
+        /// <summary>
+        /// Get InAppCustomData 
+        /// </summary>
+        public static event Action<Dictionary<string, string>> InAppCustomData;
 
         /// <summary>
         /// Enter point to Initialize Reteno
         /// </summary>
         /// <param name="appId"></param>
-        public static void Initialize(string appId) => Platform.Initialize(appId);
-
+        public static void Initialize(string appId)
+        {
+            Platform.Initialize(appId);
+            InAppMessagesManager.CustomData += InAppMessagesManagerOnCustomData;
+        }
+        
         /// <summary>
         /// Sets the user attributes using the specified user
         /// </summary>
@@ -110,5 +122,22 @@ namespace Reteno.Core
         /// <param name="screenName">The custom events</param>
         public static void LogScreenView(string screenName) =>
             EventManager.LogScreenView(screenName);
+
+        /// <summary>
+        /// Set pause all in app messages
+        /// </summary>
+        /// <param name="isPaused">Status paused</param>
+        public static void PauseInAppMessages(bool isPaused) => 
+            InAppMessagesManager.PauseInAppMessages(isPaused);
+
+        /// <summary>
+        /// Set specific pause for in app messages
+        /// </summary>
+        /// <param name="inAppPauseBehaviour">Specific type</param>
+        public static void SetInAppMessagesPauseBehaviour(InAppPauseBehaviour inAppPauseBehaviour) =>
+            InAppMessagesManager.SetInAppMessagesPauseBehaviour(inAppPauseBehaviour);
+        
+        private static void InAppMessagesManagerOnCustomData(Dictionary<string, string> customData) =>
+            InAppCustomData?.Invoke(customData);
     }
 }
