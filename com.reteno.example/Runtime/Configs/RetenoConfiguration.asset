@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c6dfb4eaf544a97b9311bebe2b5f7b1, type: 3}
+  m_Name: RetenoConfiguration
+  m_EditorClassIdentifier: 
+  IsAutomaticScreenReportingEnabled: 1
+  IsAutomaticAppLifecycleReportingEnabled: 1
+  IsAutomaticPushSubscriptionReportingEnabled: 1
+  IsAutomaticSessionReportingEnabled: 1
+  IsPausedInAppMessages: 0
+  InAppMessagesPauseBehaviour: 0
+  IsDebugMode: 0

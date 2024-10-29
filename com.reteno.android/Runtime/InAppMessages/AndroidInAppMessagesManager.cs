@@ -13,8 +13,19 @@ namespace Reteno.Android.InAppMessages
     {
         public event Action<Dictionary<string, string>> CustomData;
 
+        private IRetenoCustomDataListener _retenoCustomDataListener;
+
         public void Initialize()
         {
+            _retenoCustomDataListener = new RetenoCustomDataListener();
+            _retenoCustomDataListener.CustomData += RetenoCustomDataListenerOnCustomData;
+
+            SetInAppMessageCustomDataListener(_retenoCustomDataListener);
+
+            void RetenoCustomDataListenerOnCustomData(Dictionary<string, string> customData)
+            {
+                CustomData?.Invoke(customData);
+            }
         }
 
         public void PauseInAppMessages(bool isPaused)
@@ -32,7 +43,7 @@ namespace Reteno.Android.InAppMessages
             reteno.Call("setPushInAppMessagesPauseBehaviour", enumValue);
         }
 
-        public void SetInAppMessageCustomDataListener(RetenoCustomDataListener listener)
+        private void SetInAppMessageCustomDataListener(IRetenoCustomDataListener listener)
         {
             AndroidJavaObject customDataHandler = RetenoJavaInstance.GetCustomDataHandler();
             if (listener == null)

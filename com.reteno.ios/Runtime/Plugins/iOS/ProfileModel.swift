@@ -141,6 +141,6 @@ public class ProfileModel: NSObject {
             guard let userAttributes = attributes else { return }
             
             Reteno.updateUserAttributes(externalUserId: user.id, userAttributes: userAttributes, subscriptionKeys: subscriptionKeys, groupNamesInclude: groupNamesInclude, groupNamesExclude: groupNamesExclude)
+            }
         }
     }
-}

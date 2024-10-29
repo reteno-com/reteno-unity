@@ -1,4 +1,5 @@
 using System;
+using Reteno.Core.Initialization;
 using Reteno.Events;
 using Reteno.InAppMessages;
 using Reteno.Notifications;
@@ -31,6 +32,6 @@ namespace Reteno.Core
             OnInitialize?.Invoke(appId);
         }
         
-        public abstract void Initialize(string appId);
+        public abstract void Initialize(string appId, RetenoConfiguration retenoConfiguration = null);
     }
 }

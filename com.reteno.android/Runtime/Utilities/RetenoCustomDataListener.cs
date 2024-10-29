@@ -1,9 +1,15 @@
+using System;
 using System.Collections.Generic;
 
 namespace Reteno.Android.Utilities
 {
-    public interface RetenoCustomDataListener
+    public class RetenoCustomDataListener : IRetenoCustomDataListener
     {
-        void OnCustomDataReceived(Dictionary<string, string> customData);
+        public event Action<Dictionary<string, string>> CustomData;
+
+        public void OnCustomDataReceived(Dictionary<string, string> customData)
+        {
+            CustomData?.Invoke(customData);
+        }
     }
 }

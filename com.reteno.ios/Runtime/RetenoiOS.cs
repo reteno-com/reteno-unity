@@ -1,6 +1,7 @@
 using System.Runtime.InteropServices;
 
 using Reteno.Core;
+using Reteno.Core.Initialization;
 using Reteno.Debug;
 using Reteno.Events;
 using Reteno.InAppMessages;
@@ -18,7 +19,14 @@ namespace Reteno.iOS
         private static RetenoiOS _instance;
 
         [DllImport("__Internal")]
-        private static extern void startReteno(string apiKey, bool debugMode);
+        private static extern void startRetenoWithConfiguration(string apiKey,
+            bool isAutomaticScreenReportingEnabled,
+            bool isAutomaticAppLifecycleReportingEnabled,
+            bool isAutomaticPushSubscriptionReportingEnabled,
+            bool isAutomaticSessionReportingEnabled,
+            bool isPausedInAppMessages,
+            int inAppMessagesPauseBehaviour,
+            bool isDebugMode);
 
         public override INotificationsManager Notifications => _iOSNotificationsManager;
         public override IUserManager UserManager => _iOSUserManager;
@@ -32,11 +40,22 @@ namespace Reteno.iOS
         private iOSEventManager _iOSEventManager;
         private iOSPushNotificationPermissionManager _iOSPushNotificationPermissionManager;
     
-        public override void Initialize(string appId)
+        public override void Initialize(string appId, RetenoConfiguration retenoConfiguration = null)
         {
-            SDKDebug.Info(nameof(Initialize) + "iOS platform"); 
+            SDKDebug.Info(nameof(Initialize) + "iOS platform");
 
-            startReteno(appId, false);
+            retenoConfiguration ??= new RetenoConfiguration();
+            
+            startRetenoWithConfiguration(
+                appId, 
+                retenoConfiguration.IsAutomaticScreenReportingEnabled,
+                retenoConfiguration.IsAutomaticAppLifecycleReportingEnabled,
+                retenoConfiguration.IsAutomaticPushSubscriptionReportingEnabled,
+                retenoConfiguration.IsAutomaticSessionReportingEnabled,
+                retenoConfiguration.IsPausedInAppMessages,
+                retenoConfiguration.InAppMessagesPauseBehaviour,
+                retenoConfiguration.IsDebugMode
+                );
 
             _iOSNotificationsManager = new iOSNotificationsManager();
             _iOSUserManager = new iOSUserManager();

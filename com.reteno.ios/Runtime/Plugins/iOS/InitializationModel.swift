@@ -10,14 +10,23 @@ import FirebaseMessaging
     
     private override init() {
         super.init()
-            Messaging.messaging().delegate = self
+        Messaging.messaging().delegate = self
     }
-    
-    @objc public func start(apikey: String)
-    {
-        Reteno.delayedSetup(apiKey: apikey)
+
+    @objc public func startWithConfiguration(_ config: RetenoInitConfiguration) {
+        let retonoConfig = RetenoConfiguration(
+            isAutomaticScreenReportingEnabled: config.isAutomaticScreenReportingEnabled,
+            isAutomaticAppLifecycleReportingEnabled: config.isAutomaticAppLifecycleReportingEnabled,
+            isAutomaticPushSubsriptionReportingEnabled: config.isAutomaticPushSubscriptionReportingEnabled,
+            isAutomaticSessionReportingEnabled: config.isAutomaticSessionReportingEnabled,
+            isPausedInAppMessages: config.isPausedInAppMessages,
+            inAppMessagesPauseBehaviour: config.inAppMessagesPauseBehaviour,
+            isDebugMode: config.isDebugMode
+        )
+        
+        Reteno.delayedSetup(apiKey: config.apiKey, configuration: retonoConfig)
     }
-    
+            
     @objc public func delayStart()
     {
         if FirebaseApp.app() == nil {

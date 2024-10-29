@@ -2,6 +2,7 @@ using Reteno.Android.Events;
 using Reteno.Android.InAppMessages;
 using Reteno.Android.Users;
 using Reteno.Core;
+using Reteno.Core.Initialization;
 using Reteno.Debug;
 using Reteno.Events;
 using Reteno.InAppMessages;
@@ -27,10 +28,13 @@ namespace Reteno.Android
         private AndroidEventManager _androidEventManager;
         private AndroidPushNotificationPermissionManager _androidPushNotificationPermissionManager;
 
-        public override void Initialize(string appId)
+        public override void Initialize(string appId, RetenoConfiguration retenoConfiguration = null)
         { 
-            SDKDebug.Info(nameof(Initialize) + "Android platform"); 
-            InitReteno(appId);
+            SDKDebug.Info(nameof(Initialize) + "Android platform");
+
+            retenoConfiguration ??= new RetenoConfiguration();
+         
+            InitReteno(appId, retenoConfiguration);
            
            _androidNotifications ??= new AndroidNotificationsManager();
            _androidUserManager ??= new AndroidUserManager();
@@ -38,28 +42,36 @@ namespace Reteno.Android
            _androidEventManager ??= new AndroidEventManager();
            _androidPushNotificationPermissionManager ??= new AndroidPushNotificationPermissionManager();
            
-           SDKDebug.Info( "End init");
+           SDKDebug.Info("End init");
         }
-
-        private void InitReteno(string apiKey)
+        
+        private void InitReteno(string apiKey, RetenoConfiguration config)
         {
             const string unityPlayerClass = "com.unity3d.player.UnityPlayer";
             const string retenoProviderClass = "com.reteno.unity.RetenoProvider";
-            
+
             try
             {
                 AndroidJavaClass unityPlayer = new AndroidJavaClass(unityPlayerClass);
                 AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
                 AndroidJavaObject context = activity.Call<AndroidJavaObject>("getApplicationContext");
                 AndroidJavaClass retenoProvider = new AndroidJavaClass(retenoProviderClass);
-             
-                retenoProvider.CallStatic("initReteno", context, apiKey);
 
-                SDKDebug.Info("Init");
+                retenoProvider.CallStatic("initReteno", context, apiKey,
+                    config.IsAutomaticScreenReportingEnabled,
+                    config.IsAutomaticAppLifecycleReportingEnabled,
+                    config.IsAutomaticPushSubscriptionReportingEnabled,
+                    config.IsAutomaticSessionReportingEnabled,
+                    config.IsPausedInAppMessages,
+                    config.InAppMessagesPauseBehaviour,
+                    config.IsDebugMode
+                );
+
+                SDKDebug.Info("Reteno Init");
             }
             catch (AndroidJavaException e)
             {
-                SDKDebug.Error(e.Message);
+                SDKDebug.Error("Reteno Init error: " + e.Message);
             }
         }
 

@@ -20,24 +20,45 @@ public class RetenoProvider {
         return null;
     }
 
-    public static void initReteno(Context unityAppContext, String apiKey) {
+    public static void initReteno(Context unityAppContext, String apiKey,
+                                  boolean isAutomaticScreenReportingEnabled,
+                                  boolean isAutomaticAppLifecycleReportingEnabled,
+                                  boolean isAutomaticPushSubscriptionReportingEnabled,
+                                  boolean isAutomaticSessionReportingEnabled,
+                                  boolean isPausedInAppMessages,
+                                  int inAppMessagesPauseBehaviour,
+                                  boolean isDebugMode) {
         try {
-            RetenoConfig config = new RetenoConfig(
-                false,
-                null,
-                LifecycleTrackingOptions.Companion.getNONE(),
-                apiKey
+
+            boolean isPausedPushInAppMessages = inAppMessagesPauseBehaviour == 1;
+
+            LifecycleTrackingOptions lifecycleOptions = new LifecycleTrackingOptions(
+                    isAutomaticAppLifecycleReportingEnabled,
+                    isAutomaticPushSubscriptionReportingEnabled,
+                    isAutomaticSessionReportingEnabled
             );
 
-            ((RetenoApplication) unityAppContext.getApplicationContext()).getRetenoInstance().initWith(config);
+            RetenoConfig config = new RetenoConfig(
+                    isPausedInAppMessages,
+                    null,
+                    lifecycleOptions,
+                    apiKey,
+                    isPausedPushInAppMessages
+            );
+
+
+            Reteno retenoInstance = ((RetenoApplication) unityAppContext.getApplicationContext()).getRetenoInstance();
+
+            retenoInstance.initWith(config);
+
             Log.d("RETENO", "successfully init Reteno with key " + apiKey);
 
-        } catch (NullPointerException | ClassCastException e) {
+        } catch (Exception e) {
             Log.d("RETENO", "Error init.");
-            e.printStackTrace();
+              e.printStackTrace();
         }
     }
-
+    
     public static RetenoCustomDataHandler getRetenoCustomDataHandler(Context unityAppContext) {
         try {
             return ((RetenoUnityApplication) unityAppContext).getCustomDataHandler();

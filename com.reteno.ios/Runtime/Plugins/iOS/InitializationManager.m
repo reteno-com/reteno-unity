@@ -2,16 +2,32 @@
 
 @implementation InitializationManager
 
++ (void)startRetenoWithApiKey:(NSString *)apiKey
+ isAutomaticScreenReportingEnabled:(BOOL)isAutomaticScreenReportingEnabled
+ isAutomaticAppLifecycleReportingEnabled:(BOOL)isAutomaticAppLifecycleReportingEnabled
+ isAutomaticPushSubscriptionReportingEnabled:(BOOL)isAutomaticPushSubscriptionReportingEnabled
+ isAutomaticSessionReportingEnabled:(BOOL)isAutomaticSessionReportingEnabled
+ isPausedInAppMessages:(BOOL)isPausedInAppMessages
+ inAppMessagesPauseBehaviour:(int)inAppMessagesPauseBehaviour
+ isDebugMode:(BOOL)isDebugMode {
+    
+    RetenoInitConfiguration *config = [[RetenoInitConfiguration alloc] initWithApiKey:apiKey
+                                             isAutomaticScreenReportingEnabled:isAutomaticScreenReportingEnabled
+                                             isAutomaticAppLifecycleReportingEnabled:isAutomaticAppLifecycleReportingEnabled
+                                             isAutomaticPushSubscriptionReportingEnabled:isAutomaticPushSubscriptionReportingEnabled
+                                             isAutomaticSessionReportingEnabled:isAutomaticSessionReportingEnabled
+                                             isPausedInAppMessages:isPausedInAppMessages
+                                             inAppMessagesPauseBehaviour:inAppMessagesPauseBehaviour
+                                             isDebugMode:isDebugMode];
 
-+ (void)startRetenoWithApiKey:(NSString *)apiKey debugMode:(BOOL)debugMode {
-    [[InitializationModel shared] startWithApikey:apiKey];
+    [[InitializationModel shared] startWithConfiguration:config];
 }
 
-+ (void)registerForNotifications{
++ (void)registerForNotifications {
     [[InitializationModel shared] registerForNotifications];
 }
 
-+ (void)delayStartReteno{
++ (void)delayStartReteno {
     [[InitializationModel shared] delayStart];
 }
 
@@ -35,38 +51,51 @@
     }
 }
 
-
 @end
 
 #ifdef __cplusplus
 extern "C" {
-    #endif
+#endif
 
-void startReteno(const char* apiKey, bool debugMode) {
+void startRetenoWithConfiguration(const char* apiKey,
+                                  bool isAutomaticScreenReportingEnabled,
+                                  bool isAutomaticAppLifecycleReportingEnabled,
+                                  bool isAutomaticPushSubscriptionReportingEnabled,
+                                  bool isAutomaticSessionReportingEnabled,
+                                  bool isPausedInAppMessages,
+                                  int inAppMessagesPauseBehaviour,
+                                  bool isDebugMode) {
     NSString *apiKeyString = [NSString stringWithUTF8String:apiKey];
-
-    [InitializationManager startRetenoWithApiKey:apiKeyString debugMode:debugMode];
+    
+    [InitializationManager startRetenoWithApiKey:apiKeyString
+               isAutomaticScreenReportingEnabled:isAutomaticScreenReportingEnabled
+               isAutomaticAppLifecycleReportingEnabled:isAutomaticAppLifecycleReportingEnabled
+               isAutomaticPushSubscriptionReportingEnabled:isAutomaticPushSubscriptionReportingEnabled
+               isAutomaticSessionReportingEnabled:isAutomaticSessionReportingEnabled
+               isPausedInAppMessages:isPausedInAppMessages
+               inAppMessagesPauseBehaviour:inAppMessagesPauseBehaviour
+               isDebugMode:isDebugMode];
 }
 
 void registerForNotifications(void) {
     [InitializationManager registerForNotifications];
 }
     
-void notificationsAddPermissionCallback(void(*callback)(bool)){
+void notificationsAddPermissionCallback(void(*callback)(bool)) {
     [InitializationManager notificationsAddPermissionCallback:^(BOOL granted) {
         callback(granted ? true : false);
     }];
 }
     
-void registerNotificationCallback(void(*callback)(const char*)){
+void registerNotificationCallback(void(*callback)(const char*)) {
     [InitializationManager registerNotificationCallback:^(NSDictionary *userInfo) {
-            NSString *jsonString = [InitializationManager serializeDictionaryToJSON:userInfo];
-            if (jsonString) {
-                callback([jsonString UTF8String]);
-            }
-        }];
+        NSString *jsonString = [InitializationManager serializeDictionaryToJSON:userInfo];
+        if (jsonString) {
+            callback([jsonString UTF8String]);
+        }
+    }];
 }
 
 #ifdef __cplusplus
-
+}
 #endif

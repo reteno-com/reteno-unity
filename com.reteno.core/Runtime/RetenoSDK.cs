@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using Reteno.Core.Initialization;
 using Reteno.Notifications;
 using Reteno.Users;
 using Reteno.Events;
@@ -77,15 +78,17 @@ namespace Reteno.Core
         /// Enter point to Initialize Reteno
         /// </summary>
         /// <param name="appId"></param>
-        public static void Initialize(string appId)
+        /// <param name="retenoConfiguration"></param>
+        public static void Initialize(string appId, RetenoConfiguration retenoConfiguration = null)
         {
-            Platform.Initialize(appId);
+            Platform.Initialize(appId, retenoConfiguration);
             InAppMessagesManager.CustomData += InAppMessagesManagerOnCustomData;
         }
-        
+
         /// <summary>
         /// Sets the user attributes using the specified user
         /// </summary>
+        /// <param name="externalUserId"></param>
         /// <param name="user">The user</param>
         public static void SetUserAttributes(string externalUserId, User user) =>
             UserManager.SetUserAttributes(externalUserId, user);
@@ -93,7 +96,7 @@ namespace Reteno.Core
         /// <summary>
         /// Sets the anonymous user attributes using the specified user
         /// </summary>
-        /// <param name="user">The user</param>
+        /// <param name="userAttributesAnonymous"></param>
         public static void SetAnonymousUserAttributes(UserAttributesAnonymous userAttributesAnonymous) =>
             UserManager.SetAnonymousUserAttributes(userAttributesAnonymous);
 

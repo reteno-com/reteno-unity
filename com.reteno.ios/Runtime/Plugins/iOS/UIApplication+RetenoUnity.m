@@ -63,6 +63,8 @@ static bool swizzled = false;
 }
 
 - (BOOL)retenoApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    
    
     [InitializationManager delayStartReteno];
 

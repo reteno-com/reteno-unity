@@ -1,3 +1,4 @@
+using Reteno.Core.Initialization;
 using UnityEngine;
 
 namespace Reteno.Core
@@ -10,9 +11,16 @@ namespace Reteno.Core
         [SerializeField] 
         private string appId;
 
+        [SerializeField]
+        private RetenoConfigurationConfig retenoConfigurationConfig;
+
         private void Start()
         {
-            RetenoSDK.Initialize(appId);
+            var retenoConfiguration = retenoConfigurationConfig != null 
+                ? retenoConfigurationConfig.GetConfig() 
+                : new RetenoConfiguration();
+            
+            RetenoSDK.Initialize(appId, retenoConfiguration);
         }
     }
 }

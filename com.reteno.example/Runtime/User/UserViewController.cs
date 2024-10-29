@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Reteno.Core;
 using Reteno.Debug;
 using Reteno.Users;
 using TMPro;
@@ -9,6 +10,8 @@ namespace Reteno.Example.UserController
 {
     public class UserInputView : MonoBehaviour
     {
+        [SerializeField] private TMP_InputField externalUserID;
+        
         [SerializeField] private TMP_InputField firstNameInput;
         [SerializeField] private TMP_InputField lastNameInput;
         [SerializeField] private TMP_InputField emailInput;
@@ -77,25 +80,29 @@ namespace Reteno.Example.UserController
 
         private void SubmitUser()
         {
-            userAttributes = new UserAttributes
+            User user = new User
             {
-                FirstName = firstNameInput.text,
-                LastName = lastNameInput.text,
-                Email = emailInput.text,
-                Phone = phoneInput.text,
-                Address = new UserAddress
+                UserAttributes = new UserAttributes
                 {
-                    Region = regionInput.text,
-                    Town = townInput.text,
-                    Address = addressInput.text,
-                    Postcode = postcodeInput.text
-                },
-                LanguageCode = languageDropdown.options[languageDropdown.value].text,
-                TimeZone = timezoneDropdown.options[timezoneDropdown.value].text,
-                Fields = GetDynamicFields()
+                    FirstName = firstNameInput.text,
+                    LastName = lastNameInput.text,
+                    Email = emailInput.text,
+                    Phone = phoneInput.text,
+                    Address = new UserAddress
+                    {
+                        Region = regionInput.text,
+                        Town = townInput.text,
+                        Address = addressInput.text,
+                        Postcode = postcodeInput.text
+                    },
+                    LanguageCode = languageDropdown.options[languageDropdown.value].text,
+                    TimeZone = timezoneDropdown.options[timezoneDropdown.value].text,
+                    Fields = GetDynamicFields()
+                }
             };
 
             SDKDebug.Info("User Attributes Submitted");
+            RetenoSDK.SetUserAttributes(externalUserID.text, user);
         }
 
         private void SubmitAnonymous()
@@ -117,6 +124,7 @@ namespace Reteno.Example.UserController
             };
 
             SDKDebug.Info("Anonymous User Attributes Submitted");
+            RetenoSDK.SetAnonymousUserAttributes(anonymousAttributes);
         }
 
         private List<Field> GetDynamicFields()

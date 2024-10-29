@@ -6,20 +6,37 @@
 
 #ifdef __cplusplus
 extern "C" {
-    #endif
+#endif
 
-    void startReteno(const char* apiKey, bool debugMode);
-    void registerForNotifications(void);
-    void notificationsAddPermissionCallback(void(*callback)(bool));
-    void registerNotificationCallback(void(*callback)(const char*));
 
-    #ifdef __cplusplus
+void startRetenoWithConfiguration(const char* apiKey,
+                                  bool isAutomaticScreenReportingEnabled,
+                                  bool isAutomaticAppLifecycleReportingEnabled,
+                                  bool isAutomaticPushSubscriptionReportingEnabled,
+                                  bool isAutomaticSessionReportingEnabled,
+                                  bool isPausedInAppMessages,
+                                  int inAppMessagesPauseBehaviour,
+                                  bool isDebugMode);
+
+void registerForNotifications(void);
+void notificationsAddPermissionCallback(void(*callback)(bool));
+void registerNotificationCallback(void(*callback)(const char*));
+
+#ifdef __cplusplus
 }
 #endif
 
 @interface InitializationManager : NSObject
 
-+ (void)startRetenoWithApiKey:(NSString *)apiKey debugMode:(BOOL)debugMode;
++ (void)startRetenoWithApiKey:(NSString *)apiKey
+ isAutomaticScreenReportingEnabled:(BOOL)isAutomaticScreenReportingEnabled
+ isAutomaticAppLifecycleReportingEnabled:(BOOL)isAutomaticAppLifecycleReportingEnabled
+ isAutomaticPushSubscriptionReportingEnabled:(BOOL)isAutomaticPushSubscriptionReportingEnabled
+ isAutomaticSessionReportingEnabled:(BOOL)isAutomaticSessionReportingEnabled
+ isPausedInAppMessages:(BOOL)isPausedInAppMessages
+ inAppMessagesPauseBehaviour:(int)inAppMessagesPauseBehaviour
+ isDebugMode:(BOOL)isDebugMode;
+
 + (void)registerForNotifications;
 + (void)delayStartReteno;
 + (void)notificationsAddPermissionCallback:(void(^)(BOOL))callback;
