@@ -7,10 +7,19 @@ import FirebaseMessaging
 {
     @objc public static let shared = InitializationModel()
     private var notificationPermissionCallback: ((Bool) -> Void)?
+    private var pushNotificationProvider: PushNotificationProvider = .fcm
     
     private override init() {
         super.init()
-        Messaging.messaging().delegate = self
+        
+        if FirebaseApp.app() == nil {
+                FirebaseApp.configure()
+                print("Configured Firebase")
+            } else {
+                print("Firebase has already been configured.")
+            }
+        
+     Messaging.messaging().delegate = self
     }
 
     @objc public func startWithConfiguration(_ config: RetenoInitConfiguration) {
@@ -24,18 +33,13 @@ import FirebaseMessaging
             isDebugMode: config.isDebugMode
         )
         
+        pushNotificationProvider = config.pushNotificationProvider;
+        
         Reteno.delayedSetup(apiKey: config.apiKey, configuration: retonoConfig)
     }
             
     @objc public func delayStart()
     {
-        if FirebaseApp.app() == nil {
-                FirebaseApp.configure()
-                print("Configured Firebase")
-            } else {
-                print("Firebase has already been configured.")
-            }
-        
         Reteno.delayedStart();
     }
     
@@ -57,11 +61,23 @@ import FirebaseMessaging
     }
 
     @objc public func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-      
-        guard let fcmToken = Messaging.messaging().fcmToken else { return }
+        guard let fcmToken = fcmToken else { return }
         
         print("FCM device token: ", fcmToken)
         
-        Reteno.userNotificationService.processRemoteNotificationsToken(fcmToken)
+          if pushNotificationProvider == .fcm {
+              Reteno.userNotificationService.processRemoteNotificationsToken(fcmToken)
+          }
+    }
+    
+    @objc public func didRegisterForRemoteNotificationsWithDeviceToken(_ deviceToken: Data) {
+        let tokenParts = deviceToken.map { data in String(format: "%02.2hhx", data) }
+        let token = tokenParts.joined()
+       
+        print("APNs device token: \(token)")
+
+        if pushNotificationProvider == .apns {
+            Reteno.userNotificationService.processRemoteNotificationsToken(token)
+        }
     }
 }

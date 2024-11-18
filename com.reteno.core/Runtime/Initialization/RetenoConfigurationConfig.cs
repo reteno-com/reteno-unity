@@ -12,6 +12,7 @@ namespace Reteno.Core.Initialization
         public bool IsPausedInAppMessages;
         public int InAppMessagesPauseBehaviour;
         public bool IsDebugMode;
+        public PushNotificationProvider PushNotificationProvider;
 
         public RetenoConfiguration GetConfig()
         {
@@ -23,7 +24,8 @@ namespace Reteno.Core.Initialization
                 IsAutomaticSessionReportingEnabled = this.IsAutomaticSessionReportingEnabled,
                 IsPausedInAppMessages = this.IsPausedInAppMessages,
                 InAppMessagesPauseBehaviour = this.InAppMessagesPauseBehaviour,
-                IsDebugMode = this.IsDebugMode
+                IsDebugMode = this.IsDebugMode,
+                PushNotificationProvider = this.PushNotificationProvider
             };
         }
     }

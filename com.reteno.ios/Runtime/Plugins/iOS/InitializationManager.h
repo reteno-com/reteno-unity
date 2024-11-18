@@ -16,7 +16,8 @@ void startRetenoWithConfiguration(const char* apiKey,
                                   bool isAutomaticSessionReportingEnabled,
                                   bool isPausedInAppMessages,
                                   int inAppMessagesPauseBehaviour,
-                                  bool isDebugMode);
+                                  bool isDebugMode,
+                                  const char* pushNotificationProvider);
 
 void registerForNotifications(void);
 void notificationsAddPermissionCallback(void(*callback)(bool));
@@ -35,8 +36,10 @@ void registerNotificationCallback(void(*callback)(const char*));
  isAutomaticSessionReportingEnabled:(BOOL)isAutomaticSessionReportingEnabled
  isPausedInAppMessages:(BOOL)isPausedInAppMessages
  inAppMessagesPauseBehaviour:(int)inAppMessagesPauseBehaviour
- isDebugMode:(BOOL)isDebugMode;
+ isDebugMode:(BOOL)isDebugMode
+ pushNotificationProvider:(NSString *)pushNotificationProvider;
 
++ (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken;
 + (void)registerForNotifications;
 + (void)delayStartReteno;
 + (void)notificationsAddPermissionCallback:(void(^)(BOOL))callback;

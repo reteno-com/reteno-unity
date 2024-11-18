@@ -9,18 +9,24 @@
  isAutomaticSessionReportingEnabled:(BOOL)isAutomaticSessionReportingEnabled
  isPausedInAppMessages:(BOOL)isPausedInAppMessages
  inAppMessagesPauseBehaviour:(int)inAppMessagesPauseBehaviour
- isDebugMode:(BOOL)isDebugMode {
-    
+ isDebugMode:(BOOL)isDebugMode
+ pushNotificationProvider:(NSString *)pushNotificationProvider {
+
     RetenoInitConfiguration *config = [[RetenoInitConfiguration alloc] initWithApiKey:apiKey
-                                             isAutomaticScreenReportingEnabled:isAutomaticScreenReportingEnabled
-                                             isAutomaticAppLifecycleReportingEnabled:isAutomaticAppLifecycleReportingEnabled
-                                             isAutomaticPushSubscriptionReportingEnabled:isAutomaticPushSubscriptionReportingEnabled
-                                             isAutomaticSessionReportingEnabled:isAutomaticSessionReportingEnabled
-                                             isPausedInAppMessages:isPausedInAppMessages
-                                             inAppMessagesPauseBehaviour:inAppMessagesPauseBehaviour
-                                             isDebugMode:isDebugMode];
+                    isAutomaticScreenReportingEnabled:isAutomaticScreenReportingEnabled
+                    isAutomaticAppLifecycleReportingEnabled:isAutomaticAppLifecycleReportingEnabled
+                    isAutomaticPushSubscriptionReportingEnabled:isAutomaticPushSubscriptionReportingEnabled
+                    isAutomaticSessionReportingEnabled:isAutomaticSessionReportingEnabled
+                    isPausedInAppMessages:isPausedInAppMessages
+                    inAppMessagesPauseBehaviour:inAppMessagesPauseBehaviour
+                    isDebugMode:isDebugMode
+                    pushNotificationProvider:pushNotificationProvider];
 
     [[InitializationModel shared] startWithConfiguration:config];
+}
+
++ (void)didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    [[InitializationModel shared] didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
 }
 
 + (void)registerForNotifications {
@@ -64,17 +70,21 @@ void startRetenoWithConfiguration(const char* apiKey,
                                   bool isAutomaticSessionReportingEnabled,
                                   bool isPausedInAppMessages,
                                   int inAppMessagesPauseBehaviour,
-                                  bool isDebugMode) {
-    NSString *apiKeyString = [NSString stringWithUTF8String:apiKey];
+                                  bool isDebugMode,
+                                  const char* pushNotificationProvider) {
     
-    [InitializationManager startRetenoWithApiKey:apiKeyString
-               isAutomaticScreenReportingEnabled:isAutomaticScreenReportingEnabled
-               isAutomaticAppLifecycleReportingEnabled:isAutomaticAppLifecycleReportingEnabled
-               isAutomaticPushSubscriptionReportingEnabled:isAutomaticPushSubscriptionReportingEnabled
-               isAutomaticSessionReportingEnabled:isAutomaticSessionReportingEnabled
-               isPausedInAppMessages:isPausedInAppMessages
-               inAppMessagesPauseBehaviour:inAppMessagesPauseBehaviour
-               isDebugMode:isDebugMode];
+    NSString *apiKeyStr = [NSString stringWithUTF8String:apiKey];
+    NSString *providerStr = [NSString stringWithUTF8String:pushNotificationProvider];
+
+    [InitializationManager startRetenoWithApiKey:apiKeyStr
+        isAutomaticScreenReportingEnabled:isAutomaticScreenReportingEnabled
+        isAutomaticAppLifecycleReportingEnabled:isAutomaticAppLifecycleReportingEnabled
+        isAutomaticPushSubscriptionReportingEnabled:isAutomaticPushSubscriptionReportingEnabled
+        isAutomaticSessionReportingEnabled:isAutomaticSessionReportingEnabled
+        isPausedInAppMessages:isPausedInAppMessages
+        inAppMessagesPauseBehaviour:inAppMessagesPauseBehaviour
+        isDebugMode:isDebugMode
+        pushNotificationProvider:providerStr]; // Передаємо рядок
 }
 
 void registerForNotifications(void) {

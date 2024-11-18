@@ -1,10 +1,15 @@
 //
-//  ObjCConfiguration.swift
+//  RetenoInitConfiguration.swift
 //  Unity-iPhone
 //
 //  Created by Valentyn Rybachuk on 26.10.2024.
 //
 import Reteno
+
+@objc public enum PushNotificationProvider: Int {
+    case apns = 0
+    case fcm = 1
+}
 
 @objc public class RetenoInitConfiguration: NSObject {
     let apiKey: String
@@ -15,6 +20,7 @@ import Reteno
     let isPausedInAppMessages: Bool
     let inAppMessagesPauseBehaviour: PauseBehaviour
     let isDebugMode: Bool
+    let pushNotificationProvider: PushNotificationProvider
 
     @objc public init(apiKey: String,
                       isAutomaticScreenReportingEnabled: Bool,
@@ -23,7 +29,8 @@ import Reteno
                       isAutomaticSessionReportingEnabled: Bool,
                       isPausedInAppMessages: Bool,
                       inAppMessagesPauseBehaviour: Int,
-                      isDebugMode: Bool) {
+                      isDebugMode: Bool,
+                      pushNotificationProvider: String) {
         
         
         let pauseBehaviour: PauseBehaviour
@@ -44,5 +51,14 @@ import Reteno
         self.isPausedInAppMessages = isPausedInAppMessages
         self.inAppMessagesPauseBehaviour = pauseBehaviour
         self.isDebugMode = isDebugMode
+        
+        switch pushNotificationProvider.lowercased() {
+        case "apns":
+            self.pushNotificationProvider = .apns
+        case "fcm":
+            self.pushNotificationProvider = .fcm
+        default:
+            self.pushNotificationProvider = .fcm
+        }
     }
 }

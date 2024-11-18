@@ -19,3 +19,4 @@ MonoBehaviour:
   IsPausedInAppMessages: 0
   InAppMessagesPauseBehaviour: 0
   IsDebugMode: 0
+  PushNotificationProvider: 1

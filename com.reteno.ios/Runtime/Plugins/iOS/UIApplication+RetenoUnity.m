@@ -56,6 +56,12 @@ static bool swizzled = false;
         self.class, @selector(retenoApplication:didFinishLaunchingWithOptions:),
         delegateClass, @selector(application:didFinishLaunchingWithOptions:)
     );
+    
+    retenoInjectSelector(
+          self.class, @selector(application:didRegisterForRemoteNotificationsWithDeviceToken:),
+          delegateClass, @selector(application:didRegisterForRemoteNotificationsWithDeviceToken:)
+      );
+
 
     swizzled = true;
 
@@ -64,14 +70,21 @@ static bool swizzled = false;
 
 - (BOOL)retenoApplication:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    
-   
     [InitializationManager delayStartReteno];
 
     if ([self respondsToSelector:@selector(retenoApplication:didFinishLaunchingWithOptions:)])
         return [self retenoApplication:application didFinishLaunchingWithOptions:launchOptions];
 
     return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+ 
+    [InitializationManager didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    
+    if ([self respondsToSelector:@selector(application:didRegisterForRemoteNotificationsWithDeviceToken:)]) {
+        [self application:application didRegisterForRemoteNotificationsWithDeviceToken:deviceToken];
+    }
 }
 
 @end

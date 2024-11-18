@@ -9,14 +9,16 @@ namespace Reteno.Core.Initialization
         public bool IsPausedInAppMessages { get; set; }
         public int InAppMessagesPauseBehaviour { get; set; }
         public bool IsDebugMode { get; set; }
+        public PushNotificationProvider PushNotificationProvider { get; set; }
 
         public RetenoConfiguration(bool isAutomaticScreenReportingEnabled = false,
-                                   bool isAutomaticAppLifecycleReportingEnabled = true,
-                                   bool isAutomaticPushSubscriptionReportingEnabled = true,
-                                   bool isAutomaticSessionReportingEnabled = true,
-                                   bool isPausedInAppMessages = false,
-                                   int inAppMessagesPauseBehaviour = 0,
-                                   bool isDebugMode = false)
+            bool isAutomaticAppLifecycleReportingEnabled = true,
+            bool isAutomaticPushSubscriptionReportingEnabled = true,
+            bool isAutomaticSessionReportingEnabled = true,
+            bool isPausedInAppMessages = false,
+            int inAppMessagesPauseBehaviour = 0,
+            bool isDebugMode = false,
+            PushNotificationProvider pushNotificationProvider = PushNotificationProvider.Fcm)
         {
             IsAutomaticScreenReportingEnabled = isAutomaticScreenReportingEnabled;
             IsAutomaticAppLifecycleReportingEnabled = isAutomaticAppLifecycleReportingEnabled;
@@ -25,6 +27,7 @@ namespace Reteno.Core.Initialization
             IsPausedInAppMessages = isPausedInAppMessages;
             InAppMessagesPauseBehaviour = inAppMessagesPauseBehaviour;
             IsDebugMode = isDebugMode;
+            PushNotificationProvider = pushNotificationProvider;
         }
     }
 }

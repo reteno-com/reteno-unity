@@ -26,7 +26,8 @@ namespace Reteno.iOS
             bool isAutomaticSessionReportingEnabled,
             bool isPausedInAppMessages,
             int inAppMessagesPauseBehaviour,
-            bool isDebugMode);
+            bool isDebugMode,
+            string pushNotificationProvider); 
 
         public override INotificationsManager Notifications => _iOSNotificationsManager;
         public override IUserManager UserManager => _iOSUserManager;
@@ -54,8 +55,8 @@ namespace Reteno.iOS
                 retenoConfiguration.IsAutomaticSessionReportingEnabled,
                 retenoConfiguration.IsPausedInAppMessages,
                 retenoConfiguration.InAppMessagesPauseBehaviour,
-                retenoConfiguration.IsDebugMode
-                );
+                retenoConfiguration.IsDebugMode,
+                retenoConfiguration.PushNotificationProvider.ToString().ToLower());
 
             _iOSNotificationsManager = new iOSNotificationsManager();
             _iOSUserManager = new iOSUserManager();
