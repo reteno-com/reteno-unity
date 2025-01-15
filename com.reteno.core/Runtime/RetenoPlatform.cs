@@ -1,5 +1,6 @@
 using System;
 using Reteno.Core.Initialization;
+using Reteno.Core.Recommendations;
 using Reteno.Events;
 using Reteno.InAppMessages;
 using Reteno.Notifications;
@@ -17,6 +18,7 @@ namespace Reteno.Core
         public abstract IPushNotificationPermissionManager PushNotificationPermissionManager { get; }
         public abstract IInAppMessagesManager InAppMessagesManager { get; }
         public abstract IEventManager EventManager { get; }
+        public abstract IRecommendationsManager RecommendationsManager { get; }
 
         internal static event Action<string> OnInitialize;
 

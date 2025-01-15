@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using Reteno.Core.Initialization;
+using Reteno.Core.Recommendations;
 using Reteno.Notifications;
 using Reteno.Users;
 using Reteno.Events;
@@ -68,6 +69,7 @@ namespace Reteno.Core
             Platform.PushNotificationPermissionManager;
         private static IEventManager EventManager => Platform.EventManager;
         private static IInAppMessagesManager InAppMessagesManager => Platform.InAppMessagesManager;
+        private static IRecommendationsManager RecommendationsManager => Platform.RecommendationsManager;
 
         /// <summary>
         /// Get InAppCustomData 
@@ -139,6 +141,41 @@ namespace Reteno.Core
         /// <param name="inAppPauseBehaviour">Specific type</param>
         public static void SetInAppMessagesPauseBehaviour(InAppPauseBehaviour inAppPauseBehaviour) =>
             InAppMessagesManager.SetInAppMessagesPauseBehaviour(inAppPauseBehaviour);
+        
+        /// <summary>
+        /// Retrieves product recommendations based on the specified variant ID, product IDs, category, filters, and fields.
+        /// The results are returned asynchronously through the provided callback.
+        /// </summary>
+        /// <param name="recomVariantId">The identifier for the recommendation variant.</param>
+        /// <param name="productIds">An array of product identifiers to base the recommendations on.</param>
+        /// <param name="categoryId">The identifier for the product category.</param>
+        /// <param name="filtersJSON">A JSON string containing additional filters for the recommendations.</param>
+        /// <param name="fields">An array of fields to include in the recommendation results.</param>
+        /// <param name="callback">
+        /// A callback function that handles the response. It receives two string parameters:
+        /// the first for the JSON-formatted recommendation results and the second for any error messages.
+        /// </param>
+        public static void GetRecommendations(
+            string recomVariantId,
+            string[] productIds,
+            string categoryId,
+            string filtersJSON,
+            string[] fields,
+            Action<string, string> callback
+        )
+        {
+            RecommendationsManager.GetRecommendations(recomVariantId, productIds, categoryId, filtersJSON, fields, callback);
+        }
+
+        /// <summary>
+        /// Logs a set of recommendation events, including impressions and clicks, associated with a specific recommendation variant.
+        /// </summary>
+        /// <param name="recomEvents">
+        /// An instance of <see cref="RecomEvents"/> containing the recommendation variant ID and lists of impression and click events to be logged.
+        /// </param>
+        public static void LogRecommendations(RecomEvents recomEvents) =>
+            RecommendationsManager.LogRecommendations(recomEvents);
+
         
         private static void InAppMessagesManagerOnCustomData(Dictionary<string, string> customData) =>
             InAppCustomData?.Invoke(customData);

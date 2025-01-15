@@ -2,12 +2,14 @@ using System.Runtime.InteropServices;
 
 using Reteno.Core;
 using Reteno.Core.Initialization;
+using Reteno.Core.Recommendations;
 using Reteno.Debug;
 using Reteno.Events;
 using Reteno.InAppMessages;
 using Reteno.iOS.Events;
 using Reteno.iOS.InAppMessages;
 using Reteno.iOS.Notifications;
+using Reteno.iOS.Recommendations;
 using Reteno.iOS.Users;
 using Reteno.Notifications;
 using Reteno.Users;
@@ -34,12 +36,14 @@ namespace Reteno.iOS
         public override IPushNotificationPermissionManager PushNotificationPermissionManager => _iOSPushNotificationPermissionManager;
         public override IInAppMessagesManager InAppMessagesManager => _iOSInAppMessages;
         public override IEventManager EventManager => _iOSEventManager;
+        public override IRecommendationsManager RecommendationsManager => _iOSRecommendationsManager;
 
         private iOSNotificationsManager _iOSNotificationsManager;
         private iOSUserManager _iOSUserManager;
         private iOSInAppMessagesManager _iOSInAppMessages;
         private iOSEventManager _iOSEventManager;
         private iOSPushNotificationPermissionManager _iOSPushNotificationPermissionManager;
+        private iOSRecommendationsManager _iOSRecommendationsManager;
     
         public override void Initialize(string appId, RetenoConfiguration retenoConfiguration = null)
         {
@@ -66,6 +70,8 @@ namespace Reteno.iOS
             _iOSEventManager = new iOSEventManager();
             _iOSPushNotificationPermissionManager = new iOSPushNotificationPermissionManager();
             _iOSPushNotificationPermissionManager.Initialize();
+
+            _iOSRecommendationsManager = new iOSRecommendationsManager();
         
             SDKDebug.Info( "End init");
         }

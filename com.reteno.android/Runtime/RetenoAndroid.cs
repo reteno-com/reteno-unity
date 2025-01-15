@@ -1,8 +1,10 @@
 using Reteno.Android.Events;
 using Reteno.Android.InAppMessages;
+using Reteno.Android.Recommendations;
 using Reteno.Android.Users;
 using Reteno.Core;
 using Reteno.Core.Initialization;
+using Reteno.Core.Recommendations;
 using Reteno.Debug;
 using Reteno.Events;
 using Reteno.InAppMessages;
@@ -21,12 +23,14 @@ namespace Reteno.Android
         public override IPushNotificationPermissionManager PushNotificationPermissionManager => _androidPushNotificationPermissionManager;
         public override IInAppMessagesManager InAppMessagesManager => _androidInAppMessages;
         public override IEventManager EventManager => _androidEventManager;
+        public override IRecommendationsManager RecommendationsManager => _androidRecommendationsManager;
 
         private AndroidNotificationsManager _androidNotifications;
         private AndroidUserManager _androidUserManager;
         private AndroidInAppMessagesManager _androidInAppMessages;
         private AndroidEventManager _androidEventManager;
         private AndroidPushNotificationPermissionManager _androidPushNotificationPermissionManager;
+        private AndroidRecommendationsManager _androidRecommendationsManager;
 
         public override void Initialize(string appId, RetenoConfiguration retenoConfiguration = null)
         { 
@@ -41,6 +45,7 @@ namespace Reteno.Android
            _androidInAppMessages ??= new AndroidInAppMessagesManager();
            _androidEventManager ??= new AndroidEventManager();
            _androidPushNotificationPermissionManager ??= new AndroidPushNotificationPermissionManager();
+           _androidRecommendationsManager ??= new AndroidRecommendationsManager();
            
            SDKDebug.Info("End init");
         }
